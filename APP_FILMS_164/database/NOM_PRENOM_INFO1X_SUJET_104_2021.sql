@@ -5,16 +5,45 @@
 
 -- Détection si une autre base de donnée du même nom existe
 
-DROP DATABASE IF EXISTS mengisen_nico_info1c;
+DROP DATABASE IF EXISTS mengisen_nico_info1c_copie;
 
 -- Création d'un nouvelle base de donnée
 
-CREATE DATABASE IF NOT EXISTS mengisen_nico_info1c;
+CREATE DATABASE IF NOT EXISTS mengisen_nico_info1c_copie;
 
 -- Utilisation de cette base de donnée
 
-USE mengisen_nico_info1c;
+USE mengisen_nico_info1c_copie;
 -- --------------------------------------------------------
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 11, 2022 at 06:13 AM
+-- Server version: 5.7.11
+-- PHP Version: 5.6.18
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `mengisen_nico_info1c_copie`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_donneur`
+--
+
 CREATE TABLE `t_donneur` (
   `id_donneur` int(11) NOT NULL,
   `prenom` varchar(69) NOT NULL,

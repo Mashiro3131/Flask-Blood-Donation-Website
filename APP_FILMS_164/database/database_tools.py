@@ -7,12 +7,11 @@ Nécessite un fichier DUMP en MySql de la BD : /database/NOM_PRENOM_INFO1X_SUJET
 """
 import os
 import re
-import sys
 
 import pymysql
 import sqlparse
 from pymysql.constants import CLIENT
-from pymysql.err import raise_mysql_exception, ProgrammingError
+from pymysql.err import ProgrammingError
 
 from APP_FILMS_164 import HOST_MYSQL
 from APP_FILMS_164 import NAME_BD_MYSQL
