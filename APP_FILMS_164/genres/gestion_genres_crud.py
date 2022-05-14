@@ -17,9 +17,9 @@ from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFUpdateGenre
 
 """
     Auteur : OM 2021.03.16
-    Définition d'une "route" /genres_afficherV2
+    Définition d'une "route" /genres_afficher
     
-    Test : ex : http://127.0.0.1:5005/genres_afficherV2
+    Test : ex : http://127.0.0.1:5005/genres_afficher
     
     Paramètres : order_by : ASC : Ascendant, DESC : Descendant
                 id_genre_sel = 0 >> tous les genres.
@@ -27,14 +27,14 @@ from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFUpdateGenre
 """
 
 
-@app.route("/genres_afficherV2/<string:order_by>/<int:id_genre_sel>", methods=['GET', 'POST'])
-def genres_afficherV2(order_by, id_genre_sel):
+@app.route("/genres_afficher/<string:order_by>/<int:id_genre_sel>", methods=['GET', 'POST'])
+def genres_afficher(order_by, id_genre_sel):
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
                 if order_by == "ASC" and id_genre_sel == 0:
-                    strsql_genres_afficherV2 = """SELECT * FROM t_donneur ORDER BY id_donneur ASC"""
-                    mc_afficher.execute(strsql_genres_afficherV2)
+                    strsql_genres_afficher = """SELECT * FROM t_donneur ORDER BY id_donneur ASC"""
+                    mc_afficher.execute(strsql_genres_afficher)
                 elif order_by == "ASC":
                     # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
                     # la commande MySql classique est "SELECT * FROM t_genre"
@@ -42,13 +42,13 @@ def genres_afficherV2(order_by, id_genre_sel):
                     # donc, je précise les champs à afficher
                     # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
                     valeur_id_genre_selected_dictionnaire = {"value_id_genre_selected": id_genre_sel}
-                    strsql_genres_afficherV2 = """SELECT * FROM t_donneur WHERE id_donneur = %(value_id_genre_selected)s"""
+                    strsql_genres_afficher = """SELECT * FROM t_donneur WHERE id_donneur = %(value_id_genre_selected)s"""
 
-                    mc_afficher.execute(strsql_genres_afficherV2, valeur_id_genre_selected_dictionnaire)
+                    mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
                 else:
-                    strsql_genres_afficherV2 = """SELECT * FROM t_donneur ORDER BY id_donneur DESC"""
+                    strsql_genres_afficher = """SELECT * FROM t_donneur ORDER BY id_donneur DESC"""
 
-                    mc_afficher.execute(strsql_genres_afficherV2)
+                    mc_afficher.execute(strsql_genres_afficher)
 
                 data_genres = mc_afficher.fetchall()
 
@@ -65,13 +65,13 @@ def genres_afficherV2(order_by, id_genre_sel):
                     # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
                     flash(f"Données genres affichés !!", "success")
 
-        except Exception as Exception_genres_afficherV2:
+        except Exception as Exception_genres_afficher:
             raise ExceptionGenresAfficher(f"fichier : {Path(__file__).name}  ;  "
-                                          f"{genres_afficherV2.__name__} ; "
-                                          f"{Exception_genres_afficherV2}")
+                                          f"{genres_afficher.__name__} ; "
+                                          f"{Exception_genres_afficher}")
 
     # Envoie la page "HTML" au serveur.
-    return render_template("genres/genres_afficherV2.html", data=data_genres)
+    return render_template("genres/genres_afficher.html", data=data_genres)
 
 
 """
@@ -114,7 +114,7 @@ def genres_ajouter_wtf():
                 print(f"Données insérées !!")
 
                 # Pour afficher et constater l'insertion de la valeur, on affiche en ordre inverse. (DESC)
-                return redirect(url_for('genres_afficherV2', order_by='DESC', id_genre_sel=0))
+                return redirect(url_for('genres_afficher', order_by='DESC', id_genre_sel=0))
 
         except Exception as Exception_genres_ajouter_wtf:
             raise ExceptionGenresAjouterWtf(f"fichier : {Path(__file__).name}  ;  "
@@ -132,7 +132,7 @@ def genres_ajouter_wtf():
     
     Paramètres : sans
     
-    But : Editer(update) un genre qui a été sélectionné dans le formulaire "genres_afficherV2.html"
+    But : Editer(update) un genre qui a été sélectionné dans le formulaire "genres_afficher.html"
     
     Remarque :  Dans le champ "nom_genre_update_wtf" du formulaire "genres/genre_update_wtf.html",
                 le contrôle de la saisie s'effectue ici en Python.
@@ -171,7 +171,7 @@ def genre_update_wtf():
 
             # afficher et constater que la donnée est mise à jour.
             # Affiche seulement la valeur modifiée, "ASC" et l'"id_genre_update"
-            return redirect(url_for('genres_afficherV2', order_by="ASC", id_genre_sel=id_genre_update))
+            return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=id_genre_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "t_genre"
             str_sql_id_genre = "SELECT id_genre, intitule_genre FROM t_genre WHERE id_genre = %(value_id_genre)s"
@@ -202,7 +202,7 @@ def genre_update_wtf():
     
     Paramètres : sans
     
-    But : Effacer(delete) un genre qui a été sélectionné dans le formulaire "genres_afficherV2.html"
+    But : Effacer(delete) un genre qui a été sélectionné dans le formulaire "genres_afficher.html"
     
     Remarque :  Dans le champ "nom_genre_delete_wtf" du formulaire "genres/genre_delete_wtf.html",
                 le contrôle de la saisie est désactivée. On doit simplement cliquer sur "DELETE"
@@ -223,7 +223,7 @@ def genre_delete_wtf():
         if request.method == "POST" and form_delete.validate_on_submit():
 
             if form_delete.submit_btn_annuler.data:
-                return redirect(url_for("genres_afficherV2", order_by="ASC", id_genre_sel=0))
+                return redirect(url_for("genres_afficher", order_by="ASC", id_genre_sel=0))
 
             if form_delete.submit_btn_conf_del.data:
                 # Récupère les données afin d'afficher à nouveau
@@ -252,7 +252,7 @@ def genre_delete_wtf():
                 print(f"Genre définitivement effacé !!")
 
                 # afficher les données
-                return redirect(url_for('genres_afficherV2', order_by="ASC", id_genre_sel=0))
+                return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=0))
 
         if request.method == "GET":
             valeur_select_dictionnaire = {"value_id_genre": id_genre_delete}
