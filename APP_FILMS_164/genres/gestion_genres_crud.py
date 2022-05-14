@@ -33,8 +33,8 @@ def genres_afficherV2(order_by, id_genre_sel):
         try:
             with DBconnection() as mc_afficher:
                 if order_by == "ASC" and id_genre_sel == 0:
-                    strsql_genres_afficher = """SELECT * FROM t_donneur ORDER BY id_donneur ASC"""
-                    mc_afficher.execute(strsql_genres_afficher)
+                    strsql_genres_afficherV2 = """SELECT * FROM t_donneur ORDER BY id_donneur ASC"""
+                    mc_afficher.execute(strsql_genres_afficherV2)
                 elif order_by == "ASC":
                     # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
                     # la commande MySql classique est "SELECT * FROM t_genre"
@@ -42,13 +42,13 @@ def genres_afficherV2(order_by, id_genre_sel):
                     # donc, je précise les champs à afficher
                     # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
                     valeur_id_genre_selected_dictionnaire = {"value_id_genre_selected": id_genre_sel}
-                    strsql_genres_afficher = """SELECT * FROM t_donneur WHERE id_donneur = %(value_id_genre_selected)s"""
+                    strsql_genres_afficherV2 = """SELECT * FROM t_donneur WHERE id_donneur = %(value_id_genre_selected)s"""
 
-                    mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
+                    mc_afficher.execute(strsql_genres_afficherV2, valeur_id_genre_selected_dictionnaire)
                 else:
-                    strsql_genres_afficher = """SELECT * FROM t_donneur ORDER BY id_donneur DESC"""
+                    strsql_genres_afficherV2 = """SELECT * FROM t_donneur ORDER BY id_donneur DESC"""
 
-                    mc_afficher.execute(strsql_genres_afficher)
+                    mc_afficher.execute(strsql_genres_afficherV2)
 
                 data_genres = mc_afficher.fetchall()
 
@@ -65,10 +65,10 @@ def genres_afficherV2(order_by, id_genre_sel):
                     # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
                     flash(f"Données genres affichés !!", "success")
 
-        except Exception as Exception_genres_afficher:
+        except Exception as Exception_genres_afficherV2:
             raise ExceptionGenresAfficher(f"fichier : {Path(__file__).name}  ;  "
                                           f"{genres_afficherV2.__name__} ; "
-                                          f"{Exception_genres_afficher}")
+                                          f"{Exception_genres_afficherV2}")
 
     # Envoie la page "HTML" au serveur.
     return render_template("genres/genres_afficherV2.html", data=data_genres)
