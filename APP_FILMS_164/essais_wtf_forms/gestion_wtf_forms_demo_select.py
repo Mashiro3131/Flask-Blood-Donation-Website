@@ -1,7 +1,7 @@
 """
     Fichier : gestion_genres_crud.py
     Auteur : OM 2021.03.16
-    Gestions des "routes" FLASK et des données pour les genres.
+    Gestions des "routes" FLASK et des données pour les genres (.
 """
 import sys
 
