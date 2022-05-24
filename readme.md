@@ -15,7 +15,7 @@ Le "début de la fin"
 * Python doit être installé.
   * ATTENTION : Cocher la case pour que le "PATH" intègre le programme Python
   * Une fois la "case à cocher" du PATH cochée, il faut choisir d'installer
-  * Un peu avant la fin du processus d'intallation, cliquer sur "disabled length limit" et cliquer sur "CLOSE"
+  * Un peu avant la fin du processus d'installation, cliquer sur "disabled length limit" et cliquer sur "CLOSE"
   * Le test de Python se fait après avec le programme "PyCharm"
 * Installer "GIT"
   * https://gitforwindows.org/

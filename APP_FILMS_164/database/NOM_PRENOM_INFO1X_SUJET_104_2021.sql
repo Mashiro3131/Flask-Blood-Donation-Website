@@ -58,9 +58,9 @@ CREATE TABLE `t_donneur` (
 --
 -- Dumping data for table `t_donneur`
 --
-
+prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin
 INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES
-(1, 'Nicolas', 'Mangisson', '1296 Coppet', 'mengisennico@gmail.com', '078-894-22-08', '2004-05-25', 'O+'),
+(1, 'Nicolas', 'Mangisson', '1296 Coppet', 'mangissonnnico@gmail.com', '078-894-22-08', '2004-05-25', 'O+'),
 (2, 'Kachaw', 'Flash', '3482 Radiator Springs', 'flash.mcqueen@radspri.com', '079-991-11-72', '2006-06-14', 'AB-'),
 (3, 'Se', 'Null', '1297 Founex', 'senull@bing.com', '075-637-29-62', '2023-05-25', 'B-'),
 (4, 'Suisse', 'Roro', '1442 Montagny-pres-Yverdon', 'suisseroro@yahoo.ch', '079-109-01-02', '1291-08-01', 'A+');
