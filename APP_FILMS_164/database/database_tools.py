@@ -3,7 +3,7 @@
 Fichier : database_tools.py
 Auteur : OM 2021.03.03
 Nécessite un fichier de configuration externe : ".env"
-Nécessite un fichier DUMP en MySql de la BD : /database/NOM_PRENOM_INFO1X_SUJET_164_2022.sql
+Nécessite un fichier DUMP en MySql de la BD : /database/MENGISEN_NICO_INFO1C_DON-DU-SANG_164_2022.sql
 """
 import os
 import re
@@ -35,7 +35,7 @@ class ToolsBd:
         Auteur : OM 2021.03.09
         Nom : extract_name_bd_from_dump_file(self)
         But : Extrait la chaîne de caractère du nom de la base de donnée contenu dans le fichier :
-                    "NOM_PRENOM_INFO1X_SUJET_164_2022.sql"
+                    "MENGISEN_NICO_INFO1C_DON-DU-SANG_164_2022.sql"
                     à la ligne de commande "USE NOM_PRENOM_INFO1X_SUJET_164_2021;"
         """
         extract_nom_bd = ""
@@ -64,7 +64,7 @@ class ToolsBd:
         """Lecture du fichier DUMP et détection des erreurs à la création de la bd.
         Auteur : OM 2021.03.09
         Nom : test_cmd_CRD_file_dump_sql(self)
-        Tester si il y a des problèmes éventuels sur le fichier : "NOM_PRENOM_INFO1X_SUJET_164_2022.sql"
+        Tester si il y a des problèmes éventuels sur le fichier : "MENGISEN_NICO_INFO1C_DON-DU-SANG_164_2022.sql"
         Son emplacement, son nom, son ouverture et s'il contient les commandes MySql suivantes :
             DROP DATABASE IF EXIST nom_bd; CREATE DATABASE IF NOT EXISTS nom_bd; USE nom_bd;
             (Commandes obligatoires pour le MODULE 164, afin de garantir la dernière version de la BD)
@@ -74,7 +74,7 @@ class ToolsBd:
             if os.path.exists(NAME_FILE_DUMP_SQL_BD):
                 fichier_dump_sql_bd = open(NAME_FILE_DUMP_SQL_BD, "r", encoding="utf8")
                 lignes_fichier_dump = fichier_dump_sql_bd.read()
-                """Si le fichier DUMP en SQL "../database/NOM_PRENOM_INFO1X_SUJET_164_2022.sql" existe, 
+                """Si le fichier DUMP en SQL "../database/MENGISEN_NICO_INFO1C_DON-DU-SANG_164_2022.sql" existe, 
                     on l'ouvre et il est "découpé" dans une LISTE ligne par ligne.
                     Dans une boucle FOR chaque élément de la liste (ligne du fichier) est "executée"
                     sur le Serveur MySql
