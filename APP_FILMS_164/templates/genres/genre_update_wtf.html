@@ -27,13 +27,24 @@
 <!--groupe_sanguin-->	{{ form.nom_groupe_sanguin_update_wtf.label }}<br>
 <!--groupe_sanguin-->	{{ form.nom_groupe_sanguin_update_wtf(size=32) }}<br>
 						{% for error in form.nom_prenom_update_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
 						{% for error in form.nom_nom_update_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
 						{% for error in form.nom_adresse_update_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
 						{% for error in form.nom_mail_update_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
 						{% for error in form.nom_num_tel_update_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
 						{% for error in form.nom_date_naissance_update_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
 						{% for error in form.nom_groupe_sanguin_update_wtf.errors %}
-
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>

@@ -1,40 +1,27 @@
 {% extends "base.html" %}
-{% block title %} Ajouter un nouveau donneur WTF {% endblock %}
+{% block title %} Ajouter un GENRE (WTF) {% endblock %}
 {% block body %}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<p>
-				Ajouter les données d'un donneur ! (gestion_genres_wtf_forms.py et genres_ajouter_wtf.html (WTF))
+				Ajouter un nouveau dsjfksdhf (WTForms)
 			</p>
 			<form action="" method="POST" novalidate>
 				<!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
 				{{ form.hidden_tag() }}
 				<div class="form-group">
 					<p>
-		<!--prenom-->	{{ form.nom_prenom_wtf.label }}<br>
-		<!--prenom-->	{{ form.nom_prenom_wtf(size=32) }}<br>
-		<!--nom-->		{{ form.nom_nom_wtf.label }}<br>
-		<!--nom-->		{{ form.nom_nom_wtf(size=32) }}<br>
- 		<!--adresse-->	{{ form.nom_adresse_wtf.label }}<br>
-		<!--adresse-->	{{ form.nom_adresse_wtf(size=32) }}<br>
-		<!--mail-->		{{ form.nom_mail_wtf.label }}<br>
-		<!--mail-->		{{ form.nom_mail_wtf(size=32) }}<br>
-		<!--num_tel-->	{{ form.nom_num_tel_wtf.label }}<br>
-		<!--num_tel-->	{{ form.nom_num_tel_wtf(size=32) }}<br>
-<!--date_naissance-->	{{ form.nom_date_naissance_wtf.label }}<br>
-<!--date_naissance-->	{{ form.nom_date_naissance_wtf(size=32) }}<br>
-<!--groupe_sanguin-->	{{ form.nom_groupe_sanguin_wtf.label }}<br>
-<!--groupe_sanguin-->	{{ form.nom_groupe_sanguin_wtf(size=32) }}<br>
+						{{ form.nom_prenom_wtf.label }}<br>
+						{{ form.nom_prenom_wtf(size=32) }}<br>
 						{% for error in form.nom_prenom_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+					<p>
+						{{ form.nom_nom_wtf.label }}<br>
+						{{ form.nom_nom_wtf(size=32) }}<br>
 						{% for error in form.nom_nom_wtf.errors %}
-						{% for error in form.nom_adresse_wtf.errors %}
-						{% for error in nom_mail_wtf.errors %}
-						{% for error in form.nom_num_tel_wtf.errors %}
-						{% for error in form.nom_date_naissance_wtf.errors %}
-						{% for error in nom_groupe_sanguin_wtf.errors %}
-
-
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>

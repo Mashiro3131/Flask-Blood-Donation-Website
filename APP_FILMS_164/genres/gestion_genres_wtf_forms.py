@@ -74,7 +74,7 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                 "apostrophe, de double trait union")
                                                  ])
 
-    submit = SubmitField("Enregistrer genre")
+    submit = SubmitField("Enregistrer donneur")
 
 
 class FormWTFUpdateGenre(FlaskForm):
@@ -146,6 +146,67 @@ class FormWTFUpdateGenre(FlaskForm):
 
 
 class FormWTFDeleteGenre(FlaskForm):
+
+    nom_prenom_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_prenom_delete_wtf = StringField("Prénom ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                          Regexp(nom_prenom_delete_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
+    nom_nom_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_nom_delete_wtf = StringField("Nom", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(nom_nom_delete_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
+    nom_adresse_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_adresse_delete_wtf = StringField("Adresse", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(nom_adresse_delete_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
+    nom_mail_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_mail_delete_wtf = StringField("Mail", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(nom_mail_delete_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
+    nom_num_tel_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_num_tel_delete_wtf = StringField("Numero de telephone (a changer pour etre compatible avec chiffre dans gestion_genres_wtf_forms.py", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(nom_num_tel_delete_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
+    nom_date_naissance_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_date_naissance_delete_wtf = StringField("Date de naissance", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(nom_date_naissance_delete_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
+    nom_groupe_sanguin_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_groupe_sanguin_delete_wtf = StringField("Groupe sanguin", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(nom_groupe_sanguin_delete_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
+
+    submit = SubmitField
     """
         Dans le formulaire "genre_delete_wtf.html"
 
