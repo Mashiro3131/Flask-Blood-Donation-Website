@@ -5,47 +5,68 @@
 	<div class="row">
 		<div class="col-md-12">
 			<p>
-				Editer un DONNEUR !!
+				Editer un donneur !
 			</p>
 			<form action="" method="POST" novalidate>
 				<!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
 				{{ form_update.hidden_tag() }}
 				<div class="form-group">
 					<p>
-		<!--prenom-->	{{ form.nom_prenom_update_wtf.label }}<br>
-		<!--prenom-->	{{ form.nom_prenom_update_wtf(size=32) }}<br>
-		<!--nom-->		{{ form.nom_nom_update_wtf.label }}<br>
-		<!--nom-->		{{ form.nom_nom_update_wtf(size=32) }}<br>
- 		<!--adresse-->	{{ form.nom_adresse_update_wtf.label }}<br>
-		<!--adresse-->	{{ form.nom_adresse_update_wtf(size=32) }}<br>
-		<!--mail-->		{{ form.nom_mail_update_wtf.label }}<br>
-		<!--mail-->		{{ form.nom_mail_update_wtf(size=32) }}<br>
-		<!--num_tel-->	{{ form.nom_num_tel_update_wtf.label }}<br>
-		<!--num_tel-->	{{ form.nom_num_tel_update_wtf(size=32) }}<br>
-<!--date_naissance-->	{{ form.nom_date_naissance_update_wtf.label }}<br>
-<!--date_naissance-->	{{ form.nom_date_naissance_update_wtf(size=32) }}<br>
-<!--groupe_sanguin-->	{{ form.nom_groupe_sanguin_update_wtf.label }}<br>
-<!--groupe_sanguin-->	{{ form.nom_groupe_sanguin_update_wtf(size=32) }}<br>
-						{% for error in form.nom_prenom_update_wtf.errors %}
+						<center>
+						{{ form.nom_prenom_update_wtf.label }}<br>
+						{{ form.nom_prenom_update_wtf(size=32)<br>
+						{{ for error in form.nom_prenom_update_wtf.errors }}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
+						</center>
+					</p>
+					<p>
+						<center>
+						{{ form.nom_nom_update_wtf.label }}<br>
+						{{ form.nom_nom_update_wtf(size=32) }}<br>
 						{% for error in form.nom_nom_update_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
+						</center>
+					</p>
+					<p>
+						<center>
+						{{ form.nom_adresse_update_wtf.label }}<br>
+						{{ form.nom_nom_adresse_wtf(size=32) }}<br>
 						{% for error in form.nom_adresse_update_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
-						{% for error in form.nom_mail_update_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						{% for error in form.nom_num_tel_update_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						{% for error in form.nom_date_naissance_update_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						{% for error in form.nom_groupe_sanguin_update_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
+						</center>
+					</p>
+<!--		&lt;!&ndash;nom&ndash;&gt;		-->
+<!--		&lt;!&ndash;nom&ndash;&gt;		-->
+<!-- 		&lt;!&ndash;adresse&ndash;&gt;	{{ form.nom_adresse_update_wtf.label }}<br>-->
+<!--		&lt;!&ndash;adresse&ndash;&gt;	{{ form.nom_adresse_update_wtf(size=32) }}<br>-->
+<!--		&lt;!&ndash;mail&ndash;&gt;		{{ form.nom_mail_update_wtf.label }}<br>-->
+<!--		&lt;!&ndash;mail&ndash;&gt;		{{ form.nom_mail_update_wtf(size=32) }}<br>-->
+<!--		&lt;!&ndash;num_tel&ndash;&gt;	{{ form.nom_num_tel_update_wtf.label }}<br>-->
+<!--		&lt;!&ndash;num_tel&ndash;&gt;	{{ form.nom_num_tel_update_wtf(size=32) }}<br>-->
+<!--&lt;!&ndash;date_naissance&ndash;&gt;	{{ form.nom_date_naissance_update_wtf.label }}<br>-->
+<!--&lt;!&ndash;date_naissance&ndash;&gt;	{{ form.nom_date_naissance_update_wtf(size=32) }}<br>-->
+<!--&lt;!&ndash;groupe_sanguin&ndash;&gt;	{{ form.nom_groupe_sanguin_update_wtf.label }}<br>-->
+<!--&lt;!&ndash;groupe_sanguin&ndash;&gt;	{{ form.nom_groupe_sanguin_update_wtf(size=32) }}<br>-->
+<!--						{% for error in form.nom_nom_update_wtf.errors %}-->
+<!--							-->
+<!--						-->
+<!--						{% for error in form.nom_adresse_update_wtf.errors %}-->
+<!--							<span style="color: red;">[{{ error }}]</span>-->
+<!--						{% endfor %}-->
+<!--						{% for error in form.nom_mail_update_wtf.errors %}-->
+<!--							<span style="color: red;">[{{ error }}]</span>-->
+<!--						{% endfor %}-->
+<!--						{% for error in form.nom_num_tel_update_wtf.errors %}-->
+<!--							<span style="color: red;">[{{ error }}]</span>-->
+<!--						{% endfor %}-->
+<!--						{% for error in form.nom_date_naissance_update_wtf.errors %}-->
+<!--							<span style="color: red;">[{{ error }}]</span>-->
+<!--						{% endfor %}-->
+<!--						{% for error in form.nom_groupe_sanguin_update_wtf.errors %}-->
+<!--							<span style="color: red;">[{{ error }}]</span>-->
 						{% endfor %}
 					</p>
 				</div>

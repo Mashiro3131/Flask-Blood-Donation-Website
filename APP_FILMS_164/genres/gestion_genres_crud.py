@@ -46,7 +46,7 @@ def genres_afficher(order_by, id_genre_sel):
 
                     mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
                 else:
-                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguinSELECT * FROM t_donneur ORDER BY id_donneur DESC"""
+                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur ORDER BY id_donneur DESC"""
 
                     mc_afficher.execute(strsql_genres_afficher)
 
@@ -63,7 +63,7 @@ def genres_afficher(order_by, id_genre_sel):
                 else:
                     # Dans tous les autres cas, c'est que la table "t_donneur" est vide.
                     # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
-                    flash(f"Données des donneurs affichés !! :D", "success")
+                    flash(f"Données des donneurs affichés !!", "success")
 
         except Exception as Exception_genres_afficher:
             raise ExceptionGenresAfficher(f"fichier : {Path(__file__).name}  ;  "
@@ -115,24 +115,24 @@ def genres_ajouter_wtf():
                 name_groupe_sanguin_wtf = form.nom_groupe_sanguin_wtf.data
                 name_groupe_sanguin = name_groupe_sanguin_wtf
 
-                #valeurs_insertion_dictionnaire = {"value_intitule_genre": [name_prenom, name_nom, name_adresse, name_mail, name_num_tel, name_date_naissance, name_groupe_sanguin]}
+                # valeurs_insertion_dictionnaire = {"value_intitule_genre": [name_prenom, name_nom, name_adresse, name_mail, name_num_tel, name_date_naissance, name_groupe_sanguin]}
 
                 valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom,
-                                              "value_name_nom": name_nom,
-                                              "value_name_adresse": name_adresse,
-                                              "value_name_mail": name_mail,
-                                              "value_name_num_tel": name_num_tel,
-                                              "value_name_date_naissance": name_date_naissance,
-                                              "value_name_groupe_sanguin": name_groupe_sanguin
-                                              }
+                                                  "value_name_nom": name_nom,
+                                                  "value_name_adresse": name_adresse,
+                                                  "value_name_mail": name_mail,
+                                                  "value_name_num_tel": name_num_tel,
+                                                  "value_name_date_naissance": name_date_naissance,
+                                                  "value_name_groupe_sanguin": name_groupe_sanguin
+                                                  }
 
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
 
-                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur,prenom,nom,adresse,mail,num_tel,date_naissance,groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s) """
-                strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL, '', 'grossse hfdfdhhfd', '', '', '', '2022-05-17', '');"""
-                # with DBconnection() as mconn_bd:
-                #     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
+                strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s",%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s"""
+                # strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL, '', 'grossse hfdfdhhfd', '', '', '', '2022-05-17', '');"""
+                with DBconnection() as mconn_bd:
+                    mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
 
                 flash(f"Données insérées !!", "success")
                 print(f"Données insérées !!")
@@ -171,7 +171,7 @@ def genres_ajouter_wtf():
 @app.route("/genre_update", methods=['GET', 'POST'])
 def genre_update_wtf():
     # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_donneur"
-    id_genre_update = request.values['id_genre_btn_edit_html']
+    id_donneur = request.values['id_genre_btn_edit_html']
 
     # Objet formulaire pour l'UPDATE
     form_update = FormWTFUpdateGenre()
@@ -181,9 +181,9 @@ def genre_update_wtf():
             # Récup la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
             # Puis la convertir en lettres minuscules.
             name_genre_update = form_update.nom_prenom_update_wtf.data
-            name_genre_update = name_genre_update.lower()
+            name_genre_update = name_genre_update
 
-            valeur_update_dictionnaire = {"value_id_genre": id_genre_update, "value_name_genre": name_genre_update}
+            valeur_update_dictionnaire = {"value_id_genre": id_donneur, "value_name_genre": name_genre_update}
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
             str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin = %(value_name_genre)s WHERE id_donneur = %(value_id_genre)s"""
@@ -194,12 +194,12 @@ def genre_update_wtf():
             print(f"Donnée mise à jour !!")
 
             # afficher et constater que la donnée est mise à jour.
-            # Affiche seulement la valeur modifiée, "ASC" et l'"id_genre_update"
-            return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=id_genre_update))
+            # Affiche seulement la valeur modifiée, "ASC" et l'"id_donneur"
+            return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=id_donneur))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
             str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_genre WHERE id_donneur = %(value_id_genre)s"
-            valeur_select_dictionnaire = {"value_id_genre": id_genre_update}
+            valeur_select_dictionnaire = {"value_id_genre": id_donneur}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE

@@ -1,7 +1,7 @@
 -- OM 2021.02.17
 -- FICHIER MYSQL POUR FAIRE FONCTIONNER LES EXEMPLES
 -- DE REQUETES MYSQL
--- Database: zzz_xxxxx_NOM_PRENOM_INFO1X_SUJET_104_2021
+-- Database: mengisen_nico_info1c_copie
 
 -- Détection si une autre base de donnée du même nom existe
 
