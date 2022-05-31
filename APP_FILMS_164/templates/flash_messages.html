@@ -5,10 +5,10 @@
             {% for category, message in messages %}
                 <div class="container text-center alert-dismissible fade show p-0">
                     <div class="alert alert-{{ category if category != 'message' else 'info' }}  mb-2" role="alert">
-                        {{ message }}
                         <center>
+                        {{ message }}
                         <button type="button" class="close" data-bs-dismiss="alert" dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&#127778;</span>
                         </button>
                         </center>
                     </div>

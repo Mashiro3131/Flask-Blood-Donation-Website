@@ -16,29 +16,6 @@ CREATE DATABASE IF NOT EXISTS mengisen_nico_info1c_copie;
 USE mengisen_nico_info1c_copie;
 -- --------------------------------------------------------
 
--- phpMyAdmin SQL Dump
--- version 4.5.4.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 11, 2022 at 06:13 AM
--- Server version: 5.7.11
--- PHP Version: 5.6.18
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `mengisen_nico_info1c_copie`
---
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `t_donneur`
@@ -248,7 +225,3 @@ ALTER TABLE `t_transactionsang`
   ADD CONSTRAINT `t_transactionsang_ibfk_1` FOREIGN KEY (`fk_pmedical`) REFERENCES `t_pmedical` (`id_pmedical`),
   ADD CONSTRAINT `t_transactionsang_ibfk_2` FOREIGN KEY (`fk_receveur`) REFERENCES `t_receveur` (`id_receveur`),
   ADD CONSTRAINT `t_transactionsang_ibfk_3` FOREIGN KEY (`fk_donsang`) REFERENCES `t_donsang` (`id_donsang`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
