@@ -101,35 +101,17 @@ def genres_ajouter_wtf():
         try:
             if form.validate_on_submit():
                 name_prenom_wtf = form.nom_prenom_wtf.data
-                name_prenom = name_prenom_wtf.lower()
-                name_nom_wtf = form.nom_nom_wtf.data
-                name_nom = name_nom_wtf
-                name_adresse_wtf = form.nom_adresse_wtf.data
-                name_adresse = name_adresse_wtf
-                name_mail_wtf = form.nom_mail_wtf.data
-                name_mail = name_mail_wtf
-                name_num_tel_wtf = form.nom_num_tel_wtf.data
-                name_num_tel = name_num_tel_wtf
-                name_date_naissance_wtf = form.nom_date_naissance_wtf.data
-                name_date_naissance = name_date_naissance_wtf
-                name_groupe_sanguin_wtf = form.nom_groupe_sanguin_wtf.data
-                name_groupe_sanguin = name_groupe_sanguin_wtf
+                name_prenom = name_prenom_wtf
 
-                # valeurs_insertion_dictionnaire = {"value_intitule_genre": [name_prenom, name_nom, name_adresse, name_mail, name_num_tel, name_date_naissance, name_groupe_sanguin]}
-
-                valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom,
-                                                  "value_name_nom": name_nom,
-                                                  "value_name_adresse": name_adresse,
-                                                  "value_name_mail": name_mail,
-                                                  "value_name_num_tel": name_num_tel,
-                                                  "value_name_date_naissance": name_date_naissance,
-                                                  "value_name_groupe_sanguin": name_groupe_sanguin
+                valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom
                                                   }
 
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
 
-                strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s",%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s"""
+                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s"""
+                # strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s",%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s"""
+
                 # strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL, '', 'grossse hfdfdhhfd', '', '', '', '2022-05-17', '');"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)

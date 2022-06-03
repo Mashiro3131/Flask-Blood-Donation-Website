@@ -15,7 +15,8 @@ class FormWTFAjouterGenres(FlaskForm):
         Dans le formulaire "genres_ajouter_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
-    nom_prenom_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    # nom_prenom_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_prenom_regexp = ""
     nom_prenom_wtf = StringField("Prénom ", validators=[Length(min=2, max=50, message="min 2 max 50"),
                                                                    Regexp(nom_prenom_regexp,
                                                                           message="Pas de chiffres, de caractères "
@@ -23,52 +24,6 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
-    nom_nom_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    nom_nom_wtf = StringField("Nom", validators=[Length(min=2, max=50, message="min 2 max 50"),
-                                                 Regexp(nom_nom_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-
-    nom_adresse_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ0-9]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ0-9-]+$"
-    nom_adresse_wtf = StringField("Adresse ", validators=[Length(min=2, max=50, message="min 2 max 50"),
-                                                 Regexp(nom_adresse_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-
-    nom_mail_regexp = "([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+"
-    nom_mail_wtf = StringField("Mail", validators=[Length(min=2, max=50, message="min 2 max 20"),
-                                                 Regexp(nom_mail_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    # nom_num_tel_regexp = "/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/"
-    nom_num_tel_regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$"
-    nom_num_tel_wtf = StringField("Numéro de telephone", validators=[Length(min=2, max=30, message="min 2 max 30"),
-                                                 Regexp(nom_num_tel_regexp,
-                                                        message="Pas de numéro de telephone dépassant 30 caractères "
-                                                                "pas de lettres"
-                                                                )
-                                                 ])
-    nom_date_naissance_regexp = "^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
-    nom_date_naissance_wtf = StringField("Date de naissance", validators=[Length(min=10, max=10, message="min 10 max 10"),
-                                                 Regexp(nom_date_naissance_regexp,
-                                                        message="entrer les dates de naissance en YYYY-MM-DD"
-                                                        )
-                                                 ])
-    nom_groupe_sanguin_regexp = "(?:AB|A|B|O)[-+]"
-    nom_groupe_sanguin_wtf = StringField("Groupe Sanguin", validators=[Length(min=1, max=3, message="min 1 max 3"),
-                                                 Regexp(nom_groupe_sanguin_regexp,
-                                                        message="Veuillez entrer un groupe sanguin valide"
-                                                        )
-                                                 ])
 
     submit = SubmitField("Enregistrer")
 

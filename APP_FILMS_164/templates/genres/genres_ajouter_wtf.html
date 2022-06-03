@@ -22,60 +22,6 @@
 						{% endfor %}
 						</center>
 					</p>
-					<p>
-						<center>
-						{{ form.nom_nom_wtf.label }}<br>
-						{{ form.nom_nom_wtf(size=32) }}<br>
-						{% for error in form.nom_nom_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						</center>
-					</p>
-					<p>
-						<center>
-						{{ form.nom_adresse_wtf.label }}<br>
-						{{ form.nom_adresse_wtf(size=32) }}<br>
-						{% for error in form.nom_adresse_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						</center>
-					</p>
-					<p>
-						<center>
-						{{ form.nom_mail_wtf.label }}<br>
-						{{ form.nom_mail_wtf(size=32) }}<br>
-						{% for error in form.nom_mail_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						</center>
-					</p>
-					<p>
-						<center>
-						{{ form.nom_num_tel_wtf.label }}<br>
-						{{ form.nom_num_tel_wtf(size=32) }}<br>
-						{% for error in form.nom_num_tel_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						</center>
-					</p>
-					<p>
-						<center>
-						{{ form.nom_date_naissance_wtf.label }}<br>
-						{{ form.nom_date_naissance_wtf(size=32) }}<br>
-						{% for error in form.nom_date_naissance_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						</center>
-					</p>
-					<p>
-						<center>
-						{{ form.nom_groupe_sanguin_wtf.label }}<br>
-						{{ form.nom_groupe_sanguin_wtf(size=32) }}<br>
-						{% for error in form.nom_groupe_sanguin_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-						</center>
-					</p>
 				</div>
 					<center>
 				{{ form.submit(class="btn btn-primary") }}
