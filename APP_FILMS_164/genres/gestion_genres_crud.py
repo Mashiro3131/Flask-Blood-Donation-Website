@@ -107,10 +107,9 @@ def genres_ajouter_wtf():
                                                   }
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom) VALUES (NULL,%(value_name_prenom)s )"""
                 # strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s",%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
+                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom) VALUES (NULL,%(value_name_prenom)s)"""
 
-                # strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL, '', 'grossse hfdfdhhfd', '', '', '', '2022-05-17', '');"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
 
@@ -126,7 +125,6 @@ def genres_ajouter_wtf():
                                           f"{Exception_genres_ajouter_wtf}")
 
     return render_template("genres/genres_ajouter_wtf.html", form=form)
-
 
 """
     Auteur : OM 2021.03.29
