@@ -105,11 +105,9 @@ def genres_ajouter_wtf():
 
                 valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom
                                                   }
-
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-
-                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s )"""
+                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom) VALUES (NULL,%(value_name_prenom)s )"""
                 # strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s",%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
 
                 # strsql_insert_genre = """INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES (NULL, '', 'grossse hfdfdhhfd', '', '', '', '2022-05-17', '');"""
