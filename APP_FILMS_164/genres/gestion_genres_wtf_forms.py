@@ -60,6 +60,13 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                 "pas de lettres"
                                                                 )
                                                  ])
+    nom_date_naissance_regexp = ""
+    nom_date_naissance_wtf = StringField("Date de Naissance", validators=[Length(min=0, max=10, message="min 2 max 30"),
+                                                 Regexp(nom_date_naissance_regexp,
+                                                        message="Pas de numéro de telephone dépassant 30 caractères "
+                                                                "pas de lettres"
+                                                                )
+                                                 ])
 
 
     submit = SubmitField("Enregistrer")

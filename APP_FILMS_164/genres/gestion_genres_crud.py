@@ -115,19 +115,24 @@ def genres_ajouter_wtf():
                 name_num_tel_wtf = form.nom_num_tel_wtf.data
                 name_num_tel = name_num_tel_wtf
 
+                name_date_naissance_wtf = form.nom_date_naissance_wtf.data
+                name_date_naissance = name_date_naissance_wtf
+
 
 
                 valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom,
                                                   "value_name_nom": name_nom,
                                                   "value_name_adresse": name_adresse,
                                                   "value_name_mail": name_mail,
-                                                  "value_name_num_tel": name_num_tel
+                                                  "value_name_num_tel": name_num_tel,
+                                                  "value_name_date_naissance": name_date_naissance
 
                                                   }
+
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
                 # strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
-                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s)"""
+                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s )"""
 
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
