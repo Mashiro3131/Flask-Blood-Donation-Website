@@ -17,13 +17,31 @@ class FormWTFAjouterGenres(FlaskForm):
     """
     # nom_prenom_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
     nom_prenom_regexp = ""
-    nom_prenom_wtf = StringField("Prénom ", validators=[Length(min=2, max=50, message="min 2 max 50"),
+    nom_prenom_wtf = StringField("Prénom", validators=[Length(min=0, max=50, message="min 0 max 50"),
                                                                    Regexp(nom_prenom_regexp,
                                                                           message="Pas de chiffres, de caractères "
                                                                                   "spéciaux, "
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
+    # nom_nom_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_nom_regexp = ""
+    nom_nom_wtf = StringField("Nom", validators=[Length(min=0, max=50, message="min 0 max 50"),
+                                                                   Regexp(nom_nom_regexp,
+                                                                          message="Pas de chiffres, de caractères "
+                                                                                  "spéciaux, "
+                                                                                  "d'espace à double, de double "
+                                                                                  "apostrophe, de double trait union")
+                                                                   ])
+    # nom_adresse_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ0-9]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ0-9-]+$"
+    nom_adresse_regexp = ""
+    nom_adresse_wtf = StringField("Adresse ", validators=[Length(min=0, max=50, message="min 0 max 50"),
+                                                 Regexp(nom_adresse_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
 
     submit = SubmitField("Enregistrer")
 

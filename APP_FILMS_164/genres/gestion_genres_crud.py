@@ -102,13 +102,18 @@ def genres_ajouter_wtf():
             if form.validate_on_submit():
                 name_prenom_wtf = form.nom_prenom_wtf.data
                 name_prenom = name_prenom_wtf
-
-                valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom
+                name_nom_wtf = form.nom_nom_wtf.data
+                name_nom = name_nom_wtf
+                name_adresse_wtf = form.nom_adresse_wtf.data
+                name_adresse = name_adresse_wtf
+                valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom,
+                                                  "value_name_nom": name_nom,
+                                                  "value_name_adresse": name_adresse
                                                   }
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
                 # strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s",%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
-                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom) VALUES (NULL,%(value_name_prenom)s)"""
+                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s)"""
 
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
@@ -176,7 +181,7 @@ def genre_update_wtf():
             return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=id_donneur))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
-            str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_genre WHERE id_donneur = %(value_id_genre)s"
+            str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_genre)s"
             valeur_select_dictionnaire = {"value_id_genre": id_donneur}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
@@ -261,9 +266,9 @@ def genre_delete_wtf():
             print(id_genre_delete, type(id_genre_delete))
 
             # Requête qui affiche tous les films_genres qui ont le genre que l'utilisateur veut effacer
-            str_sql_genres_films_delete = """SELECT id_genre_film, nom_film, id_genre, intitule_genre FROM t_genre_film 
+            str_sql_genres_films_delete = """SELECT id_genre_film, nom_film, id_donneur, intitule_genre FROM t_genre_film 
                                             INNER JOIN t_film ON t_genre_film.fk_film = t_film.id_film
-                                            INNER JOIN t_genre ON t_genre_film.fk_genre = t_genre.id_genre
+                                            INNER JOIN t_donneur ON t_genre_film.fk_genre = t_donneur.id_donneur
                                             WHERE fk_genre = %(value_id_genre)s"""
 
             with DBconnection() as mydb_conn:
@@ -275,7 +280,7 @@ def genre_delete_wtf():
                 # le formulaire "genres/genre_delete_wtf.html" lorsque le bouton "Êtes-vous sur d'effacer ?" est cliqué.
                 session['data_films_attribue_genre_delete'] = data_films_attribue_genre_delete
 
-                # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
+                # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_donneur"
                 str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin WHERE id_donneur = %(value_id_genre)s"
 
                 mydb_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
