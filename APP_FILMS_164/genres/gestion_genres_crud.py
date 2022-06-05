@@ -177,10 +177,13 @@ def genre_update_wtf():
         if form_update.validate_on_submit():
             # Récup la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
             # Puis la convertir en lettres minuscules.
-            name_genre_update = form_update.nom_prenom_update_wtf.data
+            name_prenom_update = form_update.nom_prenom_update_wtf.data
             name_prenom_update = name_prenom_update
 
-            valeur_update_dictionnaire = {"value_id_donneur": id_donneur, "value_name_prenom": name_prenom_update}
+            valeur_update_dictionnaire = {"value_id_donneur": id_donneur,
+                                          "value_name_prenom": name_prenom_update
+
+                                         }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
             str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin = %(value_name_prenom)s WHERE id_donneur = %(value_id_donneur)s"""
