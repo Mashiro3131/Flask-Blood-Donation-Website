@@ -121,7 +121,7 @@ def genres_ajouter_wtf():
                                                   "value_name_nom": name_nom,
                                                   "value_name_adresse": name_adresse,
                                                   "value_name_mail": name_mail,
-                                                  "value_name_num_tel": name_num_tel,
+                                                  "value_name_num_tel": name_num_tel
 
                                                   }
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
@@ -180,10 +180,10 @@ def genre_update_wtf():
             name_genre_update = form_update.nom_prenom_update_wtf.data
             name_prenom_update = name_prenom_update
 
-            valeur_update_dictionnaire = {"value_id_genre": id_donneur, "value_name_genre": name_prenom_update}
+            valeur_update_dictionnaire = {"value_id_donneur": id_donneur, "value_name_prenom": name_prenom_update}
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin = %(value_name_genre)s WHERE id_donneur = %(value_id_genre)s"""
+            str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin = %(value_name_prenom)s WHERE id_donneur = %(value_id_donneur)s"""
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)
 

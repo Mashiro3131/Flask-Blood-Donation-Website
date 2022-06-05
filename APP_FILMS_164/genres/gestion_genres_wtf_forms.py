@@ -60,20 +60,6 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                 "pas de lettres"
                                                                 )
                                                  ])
-    # nom_date_naissance_regexp = "^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
-    nom_date_naissance_regexp = ""
-    nom_date_naissance_wtf = StringField("Date de Naissance", validators=[Length(min=0, max=10, message="min 10 max 10"),
-                                                 Regexp(nom_date_naissance_regexp,
-                                                        message="entrer les dates de naissance en YYYY-MM-DD"
-                                                        )
-                                                 ])
-    # nom_groupe_sanguin_regexp = "(?:AB|A|B|O|-|)"
-    nom_groupe_sanguin_regexp = ""
-    nom_groupe_sanguin_wtf = StringField("Groupe Sanguin", validators=[Length(min=0, max=3, message="min 0 max 10"),
-                                                 Regexp(nom_groupe_sanguin_regexp,
-                                                        message="entrer un groupe sanguin valide !"
-                                                        )
-                                                 ])
 
 
     submit = SubmitField("Enregistrer")
