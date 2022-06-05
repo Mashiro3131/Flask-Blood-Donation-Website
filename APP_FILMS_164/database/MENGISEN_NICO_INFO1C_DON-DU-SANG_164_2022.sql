@@ -16,25 +16,25 @@ CREATE DATABASE IF NOT EXISTS mengisen_nico_info1c_copie;
 USE mengisen_nico_info1c_copie;
 -- --------------------------------------------------------
 
-
 --
 -- Table structure for table `t_donneur`
 --
 
 CREATE TABLE `t_donneur` (
   `id_donneur` int(11) NOT NULL,
-  `prenom` varchar(69) NOT NULL,
-  `nom` varchar(69) NOT NULL,
-  `adresse` varchar(69) NOT NULL,
-  `mail` varchar(69) NOT NULL,
-  `num_tel` varchar(69) NOT NULL,
-  `date_naissance` date NOT NULL,
-  `groupe_sanguin` varchar(3) NOT NULL
+  `prenom` varchar(69) DEFAULT NULL,
+  `nom` varchar(69) DEFAULT NULL,
+  `adresse` varchar(69) DEFAULT NULL,
+  `mail` varchar(69) DEFAULT NULL,
+  `num_tel` varchar(69) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL,
+  `groupe_sanguin` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `t_donneur`
 --
+
 INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES
 (1, 'Nicolas', 'Mangisson', '1296 Coppet', 'mangissonnnico@gmail.com', '078-894-22-08', '2004-05-25', 'O+'),
 (2, 'Kachaw', 'Flash', '3482 Radiator Springs', 'flash.mcqueen@radspri.com', '079-991-11-72', '2006-06-14', 'AB-'),
@@ -49,9 +49,9 @@ INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_
 
 CREATE TABLE `t_donsang` (
   `id_donsang` int(11) NOT NULL,
-  `fk_donneur` int(11) NOT NULL,
-  `date_don` datetime NOT NULL,
-  `quantite` int(11) NOT NULL
+  `fk_donneur` int(11) DEFAULT NULL,
+  `date_don` datetime DEFAULT NULL,
+  `quantite` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -72,9 +72,9 @@ INSERT INTO `t_donsang` (`id_donsang`, `fk_donneur`, `date_don`, `quantite`) VAL
 
 CREATE TABLE `t_pmedical` (
   `id_pmedical` int(11) NOT NULL,
-  `prenom` varchar(69) NOT NULL,
-  `nom` varchar(69) NOT NULL,
-  `adresse` varchar(69) NOT NULL
+  `prenom` varchar(69) DEFAULT NULL,
+  `nom` varchar(69) DEFAULT NULL,
+  `adresse` varchar(69) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -82,10 +82,10 @@ CREATE TABLE `t_pmedical` (
 --
 
 INSERT INTO `t_pmedical` (`id_pmedical`, `prenom`, `nom`, `adresse`) VALUES
-(1, 'Manon', 'Schiff', 'maschiff@chuv.ch'),
+(1, 'Manon', 'Schiff', 'mschiff@chuv.ch'),
 (2, 'Evelyn', 'McDonald', 'emcdo@chuv.ch'),
-(3, 'Donald', 'Trompe', 'd.trompe@yandex.nk'),
-(4, 'Peter', 'Griffin', 'p.griffin@famguy.eu');
+(3, 'Donald', 'Trompe', 'dtrompe@chuv.ch'),
+(4, 'Peter', 'Griffin', 'pgriffin@chuv.ch');
 
 -- --------------------------------------------------------
 
@@ -95,13 +95,13 @@ INSERT INTO `t_pmedical` (`id_pmedical`, `prenom`, `nom`, `adresse`) VALUES
 
 CREATE TABLE `t_receveur` (
   `id_receveur` int(11) NOT NULL,
-  `prenom` varchar(69) NOT NULL,
-  `nom` varchar(69) NOT NULL,
-  `adresse` varchar(69) NOT NULL,
-  `mail` varchar(69) NOT NULL,
-  `numero_telephone` varchar(69) NOT NULL,
-  `date_naissance` date NOT NULL,
-  `groupe_sanguin` varchar(3) NOT NULL
+  `prenom` varchar(69) DEFAULT NULL,
+  `nom` varchar(69) DEFAULT NULL,
+  `adresse` varchar(69) DEFAULT NULL,
+  `mail` varchar(69) DEFAULT NULL,
+  `numero_telephone` varchar(69) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL,
+  `groupe_sanguin` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -112,8 +112,8 @@ INSERT INTO `t_receveur` (`id_receveur`, `prenom`, `nom`, `adresse`, `mail`, `nu
 (1, 'Driton', 'Selmanaj', '1860 Aigle', 'driselma@iglou.com', '076-634-93-45', '2008-09-04', 'O-'),
 (2, 'Alketa', 'Leclere', '1110 Morges', 'aleclere@gmail.com', '079-294-85-23', '2003-02-24', 'AB+'),
 (3, 'Jean-Marc', 'DuLac', '1222 Geneve', 'jmdulac@hotmail.ch', '079-349-29-54', '1960-01-15', 'AB-'),
-(4, 'Olivier', 'Maquereau', '1003 Lausanne', 'om@zorba.ru', '078-742-47-94', '0666-01-01', 'O+'),
-(NULL, '', 'grossse hfdfdhhfd', '', '', '', '2022-05-17', '');
+(4, 'Olivier', 'Maquereau', '1003 Lausanne', 'om@zorba.ru', '078-742-47-94', '0666-01-01', 'O+');
+
 -- --------------------------------------------------------
 
 --
