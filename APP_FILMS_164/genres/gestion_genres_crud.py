@@ -115,11 +115,6 @@ def genres_ajouter_wtf():
                 name_num_tel_wtf = form.nom_num_tel_wtf.data
                 name_num_tel = name_num_tel_wtf
 
-                name_date_naissance_wtf = form.nom_date_naissance_wtf.data
-                name_date_naissance = name_date_naissance_wtf
-
-                name_groupe_sanguin_wtf = form.nom_groupe_sanguin_wtf.data
-                name_groupe_sanguin = name_groupe_sanguin_wtf
 
 
                 valeurs_insertion_dictionnaire = {"value_name_prenom": name_prenom,
@@ -127,13 +122,12 @@ def genres_ajouter_wtf():
                                                   "value_name_adresse": name_adresse,
                                                   "value_name_mail": name_mail,
                                                   "value_name_num_tel": name_num_tel,
-                                                  "value_name_date_naissance": name_date_naissance,
-                                                  "value_name_groupe_sanguin": name_groupe_sanguin
+
                                                   }
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
                 # strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
-                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
+                strsql_insert_genre = """INSERT INTO t_donneur (id_donneur, prenom, nom, adresse, mail, num_tel) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s)"""
 
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
@@ -184,9 +178,9 @@ def genre_update_wtf():
             # Récup la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
             # Puis la convertir en lettres minuscules.
             name_genre_update = form_update.nom_prenom_update_wtf.data
-            name_genre_update = name_genre_update
+            name_prenom_update = name_prenom_update
 
-            valeur_update_dictionnaire = {"value_id_genre": id_donneur, "value_name_genre": name_genre_update}
+            valeur_update_dictionnaire = {"value_id_genre": id_donneur, "value_name_genre": name_prenom_update}
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
             str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin = %(value_name_genre)s WHERE id_donneur = %(value_id_genre)s"""
