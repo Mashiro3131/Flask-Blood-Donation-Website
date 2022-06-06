@@ -88,7 +88,7 @@ class FormWTFUpdateDonneur(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_prenom_update_regexp = ""
-    nom_prenom_update_wtf = StringField("Prénom", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    nom_prenom_update_wtf = StringField("Prénom", validators=[Length(min=0, max=50, message="min 0 max 50"),
                                                                           Regexp(nom_prenom_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -98,7 +98,7 @@ class FormWTFUpdateDonneur(FlaskForm):
                                                                                          "union")
                                                                           ])
     nom_nom_update_regexp = ""
-    nom_nom_update_wtf = StringField("Nom", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    nom_nom_update_wtf = StringField("Nom", validators=[Length(min=0, max=50, message="min 0 max 50"),
                                                                           Regexp(nom_nom_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -108,7 +108,7 @@ class FormWTFUpdateDonneur(FlaskForm):
                                                                                          "union")
                                                                           ])
     nom_adresse_update_regexp = ""
-    nom_adresse_update_wtf = StringField("Adresse", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    nom_adresse_update_wtf = StringField("Adresse", validators=[Length(min=0, max=50, message="min 0 max 50"),
                                                                           Regexp(nom_adresse_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -117,18 +117,18 @@ class FormWTFUpdateDonneur(FlaskForm):
                                                                                          "apostrophe, de double trait "
                                                                                          "union")
                                                                           ])
-    # nom_mail_update_regexp = ""
-    # nom_mail_update_wtf = StringField("Prénom ", validators=[Length(min=0, max=20, message="min 0 max 20"),
-    #                                                                       Regexp(nom_mail_update_regexp,
-    #                                                                              message="Pas de chiffres, de "
-    #                                                                                      "caractères "
-    #                                                                                      "spéciaux, "
-    #                                                                                      "d'espace à double, de double "
-    #                                                                                      "apostrophe, de double trait "
-    #                                                                                      "union")
-    #                                                                       ])
+    nom_mail_update_regexp = ""
+    nom_mail_update_wtf = StringField("Mail", validators=[Length(min=0, max=50, message="min 0 max 50"),
+                                                                          Regexp(nom_mail_update_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
     # nom_num_tel_update_regexp = ""
-    # nom_num_tel_update_wtf = StringField("Prénom ", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    # nom_num_tel_update_wtf = StringField("Numéro de Téléphone", validators=[Length(min=0, max=20, message="min 0 max 20"),
     #                                                                       Regexp(nom_num_tel_update_regexp,
     #                                                                              message="Pas de chiffres, de "
     #                                                                                      "caractères "
@@ -140,7 +140,7 @@ class FormWTFUpdateDonneur(FlaskForm):
     # nom_date_naissance_update_wtf = DateField("Essai date", validators=[InputRequired("Date obligatoire"),
     #                                                            DataRequired("Date non valide")])
     # nom_groupe_sanguin_update_regexp = ""
-    # nom_groupe_sanguin_update_wtf = StringField("Prénom ", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    # nom_groupe_sanguin_update_wtf = StringField("Groupe Sanguin", validators=[Length(min=0, max=20, message="min 0 max 20"),
     #                                                                       Regexp(nom_groupe_sanguin_update_regexp,
     #                                                                              message="Pas de chiffres, de "
     #                                                                                      "caractères "
