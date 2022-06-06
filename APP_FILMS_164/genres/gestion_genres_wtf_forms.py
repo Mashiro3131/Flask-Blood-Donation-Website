@@ -127,28 +127,32 @@ class FormWTFUpdateDonneur(FlaskForm):
                                                                                          "apostrophe, de double trait "
                                                                                          "union")
                                                                           ])
-    # nom_num_tel_update_regexp = ""
-    # nom_num_tel_update_wtf = StringField("Numéro de Téléphone", validators=[Length(min=0, max=20, message="min 0 max 20"),
-    #                                                                       Regexp(nom_num_tel_update_regexp,
-    #                                                                              message="Pas de chiffres, de "
-    #                                                                                      "caractères "
-    #                                                                                      "spéciaux, "
-    #                                                                                      "d'espace à double, de double "
-    #                                                                                      "apostrophe, de double trait "
-    #                                                                                      "union")
-    #                                                                       ])
-    # nom_date_naissance_update_wtf = DateField("Essai date", validators=[InputRequired("Date obligatoire"),
-    #                                                            DataRequired("Date non valide")])
-    # nom_groupe_sanguin_update_regexp = ""
-    # nom_groupe_sanguin_update_wtf = StringField("Groupe Sanguin", validators=[Length(min=0, max=20, message="min 0 max 20"),
-    #                                                                       Regexp(nom_groupe_sanguin_update_regexp,
-    #                                                                              message="Pas de chiffres, de "
-    #                                                                                      "caractères "
-    #                                                                                      "spéciaux, "
-    #                                                                                      "d'espace à double, de double "
-    #                                                                                      "apostrophe, de double trait "
-    #                                                                                      "union")
-    #                                                                       ])
+    nom_num_tel_update_regexp = ""
+    nom_num_tel_update_wtf = StringField("Numéro de Téléphone", validators=[Length(min=0, max=13, message="min 0 max 20"),
+                                                                          Regexp(nom_num_tel_update_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
+
+
+    nom_date_naissance_update_wtf = DateField("Date de Naissance", validators=[InputRequired("Date obligatoire"),
+                                                               DataRequired("Date non valide")])
+
+
+    nom_groupe_sanguin_update_regexp = ""
+    nom_groupe_sanguin_update_wtf = StringField("Groupe Sanguin", validators=[Length(min=0, max=3, message="min 0 max 20"),
+                                                                          Regexp(nom_groupe_sanguin_update_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
     submit = SubmitField("Update donneur")
 
 
