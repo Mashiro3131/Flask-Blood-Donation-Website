@@ -190,7 +190,7 @@ def genre_update_wtf():
 
             name_nom_update = form_update.nom_nom_update_wtf.data
             #
-            # name_adresse_update = form_update.nom_adresse_update_wtf.data
+            name_adresse_update = form_update.nom_adresse_update_wtf.data
             #
             # name_mail_update = form_update.nom_mail_update_wtf.data
             #
@@ -206,7 +206,7 @@ def genre_update_wtf():
             valeur_update_dictionnaire = {"value_id_donneur": id_donneur,
                                           "value_name_prenom": name_prenom_update,
                                           "value_name_nom" : name_nom_update,
-                                          # "value_name_adresse": name_adresse_update,
+                                          "value_name_adresse": name_adresse_update
                                           # "value_name_mail" : name_mail_update,
                                           # "value_name_num_tel": name_num_tel_update,
                                           # "value_name_date_naissance": name_date_naissance_update,
@@ -216,7 +216,7 @@ def genre_update_wtf():
 
             # str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin = %(value_name_prenom)s WHERE id_donneur = %(value_id_donneur)s"""
             # str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom = %(value_name_prenom)s, nom = %(value_name_nom)s, adresse = %(value_name_adresse)s, mail = %(value_name_mail)s, num_tel = %(value_name_num_tel)s, date_naissance = %(value_name_date_naissance)s, groupe_sanguin = %(value_name_groupe_sanguin)s WHERE id_donneur = %(value_id_donneur)s"""
-            str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom = %(value_name_prenom)s, nom = %(value_name_nom)s WHERE id_donneur = %(value_id_donneur)s"""
+            str_sql_update_intitulegenre = """UPDATE t_donneur SET prenom = %(value_name_prenom)s, nom = %(value_name_nom)s, adresse = %(value_name_adresse)s WHERE id_donneur = %(value_id_donneur)s"""
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)
 
@@ -229,7 +229,7 @@ def genre_update_wtf():
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
             # str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
-            str_sql_id_genre = "SELECT id_donneur, prenom, nom FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
+            str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
 
             valeur_select_dictionnaire = {"value_id_donneur": id_donneur}
             with DBconnection() as mybd_conn:
@@ -242,7 +242,7 @@ def genre_update_wtf():
             # Afficher la valeur sélectionnée dans le champ du formulaire "genre_update_wtf.html"
             form_update.nom_prenom_update_wtf.data = data_nom_prenom["prenom"]
             form_update.nom_nom_update_wtf.data = data_nom_prenom["nom"]
-            # form_update.nom_adresse_update_wtf.data = data_nom_prenom["adresse"]
+            form_update.nom_adresse_update_wtf.data = data_nom_prenom["adresse"]
             # form_update.nom_mail_update_wtf.data = data_nom_prenom["mail"]
             # form_update.nom_num_tel_update_wtf.data = data_nom_prenom["num_tel"]
             # form_update.nom_date_naissance_update_wtf.data = data_nom_prenom["date_naissance"]
