@@ -209,14 +209,14 @@ class FormWTFDeleteDonneur(FlaskForm):
                                                                 "d'espace à double, de double "
                                                                 "apostrophe, de double trait union")
                                                  ])
-    nom_groupe_sanguin_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    nom_groupe_sanguin_delete_wtf = StringField("Groupe sanguin", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                 Regexp(nom_groupe_sanguin_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
+    # nom_groupe_sanguin_delete_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    # nom_groupe_sanguin_delete_wtf = StringField("Groupe sanguin", validators=[Length(min=2, max=20, message="min 2 max 20"),
+    #                                              Regexp(nom_groupe_sanguin_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
 
     submit = SubmitField("Etes-vous sûr d'effacer ????")
     """
