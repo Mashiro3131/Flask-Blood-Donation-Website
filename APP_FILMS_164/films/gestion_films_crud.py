@@ -12,7 +12,7 @@ from flask import url_for
 from APP_FILMS_164 import app
 from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
-from APP_FILMS_164.films.gestion_films_wtf_forms import FormWTFUpdateFilm, FormWTFAddFilm, FormWTFDeleteFilm
+from APP_FILMS_164.films.gestion_films_wtf_forms import FormWTFUpdateFilm, FormWTFAjouterReceveur, FormWTFDeleteFilm
 
 """Ajouter un film grâce au formulaire "film_add_wtf.html"
 Auteur : OM 2022.04.11
@@ -27,21 +27,98 @@ Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_updat
             le contrôle de la saisie s'effectue ici en Python dans le fichier ""
             On ne doit pas accepter un champ vide.
 """
+"""
+    Auteur : OM 2021.03.16
+    Définition d'une "route" /genres_afficher
+
+    Test : ex : http://127.0.0.1:5005/genres_afficher
+
+    Paramètres : order_by : ASC : Ascendant, DESC : Descendant
+                id_donneur_sel = 0 >> tous les genres.
+                id_donneur_sel = "n" affiche le genre dont l'id est "n"
+"""
+
+
+@app.route("/genres_afficher/<string:order_by>/<int:id_donneur_sel>", methods=['GET', 'POST'])
+def donneurs_afficher(order_by, id_donneur_sel):
+    if request.method == "GET":
+        try:
+            with DBconnection() as mc_afficher:
+                if order_by == "ASC" and id_donneur_sel == 0:
+                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin from t_donneur ORDER BY id_donneur ASC"""
+                    mc_afficher.execute(strsql_genres_afficher)
+                elif order_by == "ASC":
+                    # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
+                    # la commande MySql classique est "SELECT * FROM t_donneur"
+                    # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
+                    # donc, je précise les champs à afficher
+                    # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
+                    valeur_id_genre_selected_dictionnaire = {"value_id_donneur_selected": id_donneur_sel}
+                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur_selected)s"""
+
+                    mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
+                else:
+                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur ORDER BY id_donneur DESC"""
+
+                    mc_afficher.execute(strsql_genres_afficher)
+
+                data_genres = mc_afficher.fetchall()
+
+                print("data_genres ", data_genres, " Type : ", type(data_genres))
+
+                # Différencier les messages si la table est vide.
+                if not data_genres and id_donneur_sel == 0:
+                    flash("""La table "t_donneur" est vide. !!""", "warning")
+                elif not data_genres and id_donneur_sel > 0:
+                    # Si l'utilisateur change l'id_donneur dans l'URL et que le genre n'existe pas,
+                    flash(f"Le genre demandé n'existe pas !!", "warning")
+                else:
+                    # Dans tous les autres cas, c'est que la table "t_donneur" est vide.
+                    # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
+                    flash(f"Données des donneurs affichés !!", "success")
+
+        except Exception as Exception_genres_afficher:
+            raise ExceptionGenresAfficher(f"fichier : {Path(__file__).name}  ;  "
+                                          f"{genres_afficher.__name__} ; "
+                                          f"{Exception_genres_afficher}")
+
+    # Envoie la page "HTML" au serveur.
+    return render_template("genres/genres_afficher.html", data=data_genres)
+
+
+"""
+    Auteur : OM 2021.03.22
+    Définition d'une "route" /genres_ajouter
+
+    Test : ex : http://127.0.0.1:5005/genres_ajouter
+
+    Paramètres : sans
+
+    But : Ajouter un genre pour un film
+
+    Remarque :  Dans le champ "name_genre_html" du formulaire "genres/genres_ajouter.html",
+                le contrôle de la saisie s'effectue ici en Python.
+                On transforme la saisie en minuscules.
+                On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
+                des valeurs avec des caractères qui ne sont pas des lettres.
+                Pour comprendre [A-Za-zÀ-ÖØ-öø-ÿ] il faut se reporter à la table ASCII https://www.ascii-code.com/
+                Accepte le trait d'union ou l'apostrophe, et l'espace entre deux mots, mais pas plus d'une occurence.
+"""
 
 
 @app.route("/film_add", methods=['GET', 'POST'])
 def film_add_wtf():
     # Objet formulaire pour AJOUTER un film
-    form_add_film = FormWTFAddFilm()
+    form_add_receveur = FormWTFAjouterReceveur()
     if request.method == "POST":
         try:
-            if form_add_film.validate_on_submit():
-                nom_film_add = form_add_film.nom_film_add_wtf.data
+            if form_add_receveur.validate_on_submit():
+                nom_film_add = form_add_receveur.nom_film_add_wtf.data
 
                 valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_film (id_film,nom_film) VALUES (NULL,%(value_nom_film)s) """
+                strsql_insert_film = """INSERT INTO t_receveur (id_receveur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -56,7 +133,7 @@ def film_add_wtf():
                                             f"{film_add_wtf.__name__} ; "
                                             f"{Exception_genres_ajouter_wtf}")
 
-    return render_template("films/film_add_wtf.html", form_add_film=form_add_film)
+    return render_template("films/film_add_wtf.html", form_add_receveur=form_add_receveur)
 
 
 """Editer(update) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"

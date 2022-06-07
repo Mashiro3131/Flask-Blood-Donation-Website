@@ -322,7 +322,7 @@ def genre_delete_wtf():
             print(id_genre_delete, type(id_genre_delete))
 
             # Requête qui affiche tous les films_genres qui ont le genre que l'utilisateur veut effacer
-            str_sql_genres_films_delete = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"""
+            str_sql_genres_films_delete = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)
@@ -334,7 +334,7 @@ def genre_delete_wtf():
                 session['data_films_attribue_genre_delete'] = data_films_attribue_genre_delete
 
                 # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
-                str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
+                str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
 
                 mydb_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
                 # Une seule valeur est suffisante "fetchone()",
@@ -350,7 +350,7 @@ def genre_delete_wtf():
             form_delete.nom_mail_delete_wtf.data = data_nom_donneur["mail"]
             form_delete.nom_num_tel_delete_wtf.data = data_nom_donneur["num_tel"]
             form_delete.nom_date_naissance_delete_wtf.data = data_nom_donneur["date_naissance"]
-            # form_delete.nom_groupe_sanguin_delete_wtf.data = data_nom_donneur["groupe_sanguin"]
+            form_delete.nom_groupe_sanguin_delete_wtf.data = data_nom_donneur["groupe_sanguin"]
 
 
             # Le bouton pour l'action "DELETE" dans le form. "genre_delete_wtf.html" est caché.

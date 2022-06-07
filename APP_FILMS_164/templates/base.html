@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>{% block title %}Blood Donation{% endblock %}</title>
-
+	<link rel="icon" type="image/x-icon" href="bootswatch-4/darkly/favicon.ico">
 	<!-- Bootstrap CSS en local -->
 	<!-- OM 2020.05.04 OM JE PREFERE GARDER MES FICHIERS CSS ET JS DANS UN REPERTOIRE "EN LOCAL"
         SINON ON EST TOUJOURS DEPENDANT D'UNE LIAISON A L'INTERNET. -->
@@ -23,7 +23,7 @@
 	<!-- https://bootswatch.com/superhero/ -->
 	<!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootswatch-4/superhero/bootstrap.min.css') }}">-->
 	<!-- https://flask.palletsprojects.com/en/1.1.x/patterns/favicon/ -->
-	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
 
 	{% block head %}
 	{% endblock %}
@@ -38,7 +38,8 @@
 <div class="container">
 	<nav style='display:flex; align-items:center; justify-content:center;' class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="{{ url_for('mapagepricipale') }}">Don Du Sang</a>
+			<img src="static/MyFinalLogo.png" class="img-fluid"  width="90" height="54">
+			<a class="navbar-brand" href="{{ url_for('mapagepricipale') }}"></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
