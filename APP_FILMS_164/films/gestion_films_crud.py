@@ -39,52 +39,6 @@ Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_updat
 """
 
 
-@app.route("/genres_afficher/<string:order_by>/<int:id_donneur_sel>", methods=['GET', 'POST'])
-def donneurs_afficher(order_by, id_donneur_sel):
-    if request.method == "GET":
-        try:
-            with DBconnection() as mc_afficher:
-                if order_by == "ASC" and id_donneur_sel == 0:
-                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin from t_donneur ORDER BY id_donneur ASC"""
-                    mc_afficher.execute(strsql_genres_afficher)
-                elif order_by == "ASC":
-                    # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
-                    # la commande MySql classique est "SELECT * FROM t_donneur"
-                    # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
-                    # donc, je précise les champs à afficher
-                    # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
-                    valeur_id_genre_selected_dictionnaire = {"value_id_donneur_selected": id_donneur_sel}
-                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur_selected)s"""
-
-                    mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
-                else:
-                    strsql_genres_afficher = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur ORDER BY id_donneur DESC"""
-
-                    mc_afficher.execute(strsql_genres_afficher)
-
-                data_genres = mc_afficher.fetchall()
-
-                print("data_genres ", data_genres, " Type : ", type(data_genres))
-
-                # Différencier les messages si la table est vide.
-                if not data_genres and id_donneur_sel == 0:
-                    flash("""La table "t_donneur" est vide. !!""", "warning")
-                elif not data_genres and id_donneur_sel > 0:
-                    # Si l'utilisateur change l'id_donneur dans l'URL et que le genre n'existe pas,
-                    flash(f"Le genre demandé n'existe pas !!", "warning")
-                else:
-                    # Dans tous les autres cas, c'est que la table "t_donneur" est vide.
-                    # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
-                    flash(f"Données des donneurs affichés !!", "success")
-
-        except Exception as Exception_genres_afficher:
-            raise ExceptionGenresAfficher(f"fichier : {Path(__file__).name}  ;  "
-                                          f"{genres_afficher.__name__} ; "
-                                          f"{Exception_genres_afficher}")
-
-    # Envoie la page "HTML" au serveur.
-    return render_template("genres/genres_afficher.html", data=data_genres)
-
 
 """
     Auteur : OM 2021.03.22

@@ -277,7 +277,7 @@ def genre_delete_wtf():
     data_films_attribue_genre_delete = None
     btn_submit_del = None
     # L'utilisateur vient de cliquer sur le bouton "DELETE". Récupère la valeur de "id_genre"
-    id_genre_delete = request.values['id_genre_btn_delete_html']
+    id_donneur_delete = request.values['id_donneur_btn_delete_html']
 
     # Objet formulaire pour effacer le genre sélectionné.
     form_delete = FormWTFDeleteDonneur()
@@ -300,7 +300,7 @@ def genre_delete_wtf():
                 btn_submit_del = True
 
             if form_delete.submit_btn_del.data:
-                valeur_delete_dictionnaire = {"value_id_donneur": id_genre_delete}
+                valeur_delete_dictionnaire = {"value_id_donneur": id_donneur_delete}
                 print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
 
@@ -318,8 +318,8 @@ def genre_delete_wtf():
                 return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=0))
 
         if request.method == "GET":
-            valeur_select_dictionnaire = {"value_id_donneur": id_genre_delete}
-            print(id_genre_delete, type(id_genre_delete))
+            valeur_select_dictionnaire = {"value_id_donneur": id_donneur_delete}
+            print(id_donneur_delete, type(id_donneur_delete))
 
             # Requête qui affiche tous les films_genres qui ont le genre que l'utilisateur veut effacer
             str_sql_genres_films_delete = """SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"""
@@ -340,8 +340,8 @@ def genre_delete_wtf():
                 # Une seule valeur est suffisante "fetchone()",
                 # vu qu'il n'y a qu'un seul champ "nom genre" pour l'action DELETE
                 data_nom_donneur = mydb_conn.fetchone()
-                print("data_nom_donneur ", data_nom_donneur, " type ", type(data_nom_donneur), " genre ",
-                      data_nom_donneur["intitule_genre"])
+                print("data_nom_donneur ", data_nom_donneur, " type ", type(data_nom_donneur), "prenom",
+                      data_nom_donneur["prenom"])
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "genre_delete_wtf.html"
             form_delete.nom_prenom_delete_wtf.data = data_nom_donneur["prenom"]
