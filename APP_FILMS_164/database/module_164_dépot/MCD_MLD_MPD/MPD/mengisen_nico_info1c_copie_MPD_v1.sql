@@ -1,25 +1,19 @@
--- phpMyAdmin SQL Dump
--- version 4.5.4.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 11, 2022 at 06:13 AM
--- Server version: 5.7.11
--- PHP Version: 5.6.18
+-- OM 2021.02.17
+-- FICHIER MYSQL POUR FAIRE FONCTIONNER LES EXEMPLES
+-- DE REQUETES MYSQL
+-- Database: mengisen_nico_info1c_copie
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+-- Détection si une autre base de donnée du même nom existe
 
+DROP DATABASE IF EXISTS mengisen_nico_info1c_copie;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- Création d'un nouvelle base de donnée
 
---
--- Database: `mengisen_nico_info1c_copie`
---
+CREATE DATABASE IF NOT EXISTS mengisen_nico_info1c_copie;
 
+-- Utilisation de cette base de donnée
+
+USE mengisen_nico_info1c_copie;
 -- --------------------------------------------------------
 
 --
@@ -28,13 +22,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `t_donneur` (
   `id_donneur` int(11) NOT NULL,
-  `prenom` varchar(69) NOT NULL,
-  `nom` varchar(69) NOT NULL,
-  `adresse` varchar(69) NOT NULL,
-  `mail` varchar(69) NOT NULL,
-  `num_tel` varchar(69) NOT NULL,
-  `date_naissance` date NOT NULL,
-  `groupe_sanguin` varchar(3) NOT NULL
+  `prenom` varchar(69) DEFAULT NULL,
+  `nom` varchar(69) DEFAULT NULL,
+  `adresse` varchar(69) DEFAULT NULL,
+  `mail` varchar(69) DEFAULT NULL,
+  `num_tel` varchar(69) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL,
+  `groupe_sanguin` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -42,7 +36,7 @@ CREATE TABLE `t_donneur` (
 --
 
 INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_tel`, `date_naissance`, `groupe_sanguin`) VALUES
-(1, 'Nicolas', 'Mangisson', '1296 Coppet', 'mengisennico@gmail.com', '078-894-22-08', '2004-05-25', 'O+'),
+(1, 'Nicolas', 'Mangisson', '1296 Coppet', 'mangissonnnico@gmail.com', '078-894-22-08', '2004-05-25', 'O+'),
 (2, 'Kachaw', 'Flash', '3482 Radiator Springs', 'flash.mcqueen@radspri.com', '079-991-11-72', '2006-06-14', 'AB-'),
 (3, 'Se', 'Null', '1297 Founex', 'senull@bing.com', '075-637-29-62', '2023-05-25', 'B-'),
 (4, 'Suisse', 'Roro', '1442 Montagny-pres-Yverdon', 'suisseroro@yahoo.ch', '079-109-01-02', '1291-08-01', 'A+');
@@ -55,9 +49,9 @@ INSERT INTO `t_donneur` (`id_donneur`, `prenom`, `nom`, `adresse`, `mail`, `num_
 
 CREATE TABLE `t_donsang` (
   `id_donsang` int(11) NOT NULL,
-  `fk_donneur` int(11) NOT NULL,
-  `date_don` datetime NOT NULL,
-  `quantite` int(11) NOT NULL
+  `fk_donneur` int(11) DEFAULT NULL,
+  `date_don` datetime DEFAULT NULL,
+  `quantite` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -78,9 +72,9 @@ INSERT INTO `t_donsang` (`id_donsang`, `fk_donneur`, `date_don`, `quantite`) VAL
 
 CREATE TABLE `t_pmedical` (
   `id_pmedical` int(11) NOT NULL,
-  `prenom` varchar(69) NOT NULL,
-  `nom` varchar(69) NOT NULL,
-  `adresse` varchar(69) NOT NULL
+  `prenom` varchar(69) DEFAULT NULL,
+  `nom` varchar(69) DEFAULT NULL,
+  `adresse` varchar(69) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -88,10 +82,10 @@ CREATE TABLE `t_pmedical` (
 --
 
 INSERT INTO `t_pmedical` (`id_pmedical`, `prenom`, `nom`, `adresse`) VALUES
-(1, 'Manon', 'Schiff', 'maschiff@chuv.ch'),
+(1, 'Manon', 'Schiff', 'mschiff@chuv.ch'),
 (2, 'Evelyn', 'McDonald', 'emcdo@chuv.ch'),
-(3, 'Donald', 'Trompe', 'd.trompe@yandex.nk'),
-(4, 'Peter', 'Griffin', 'p.griffin@famguy.eu');
+(3, 'Donald', 'Trompe', 'dtrompe@chuv.ch'),
+(4, 'Peter', 'Griffin', 'pgriffin@chuv.ch');
 
 -- --------------------------------------------------------
 
@@ -101,13 +95,13 @@ INSERT INTO `t_pmedical` (`id_pmedical`, `prenom`, `nom`, `adresse`) VALUES
 
 CREATE TABLE `t_receveur` (
   `id_receveur` int(11) NOT NULL,
-  `prenom` varchar(69) NOT NULL,
-  `nom` varchar(69) NOT NULL,
-  `adresse` varchar(69) NOT NULL,
-  `mail` varchar(69) NOT NULL,
-  `numero_telephone` varchar(69) NOT NULL,
-  `date_naissance` date NOT NULL,
-  `groupe_sanguin` varchar(3) NOT NULL
+  `prenom` varchar(69) DEFAULT NULL,
+  `nom` varchar(69) DEFAULT NULL,
+  `adresse` varchar(69) DEFAULT NULL,
+  `mail` varchar(69) DEFAULT NULL,
+  `numero_telephone` varchar(69) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL,
+  `groupe_sanguin` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -230,7 +224,3 @@ ALTER TABLE `t_transactionsang`
   ADD CONSTRAINT `t_transactionsang_ibfk_1` FOREIGN KEY (`fk_pmedical`) REFERENCES `t_pmedical` (`id_pmedical`),
   ADD CONSTRAINT `t_transactionsang_ibfk_2` FOREIGN KEY (`fk_receveur`) REFERENCES `t_receveur` (`id_receveur`),
   ADD CONSTRAINT `t_transactionsang_ibfk_3` FOREIGN KEY (`fk_donsang`) REFERENCES `t_donsang` (`id_donsang`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
