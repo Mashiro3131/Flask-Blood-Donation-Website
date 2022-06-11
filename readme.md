@@ -5,7 +5,7 @@ Le "début de la fin"
 
 ---
 #### Avant de commencer cette version presque finale.
-##### Cette démo. CRUD (Create Read Update Delete) presque complète sur les 3 tables de la base film : Soit "t_film"; "t_genre" et la table intermédiaire "t_genre_film"
+##### Cette démo. CRUD (Create Read Update Delete) presque complète sur les 3 tables de la base film : Soit "t_receveur"; "t_donneur" et la table intermédiaire "t_genre_film"
 * Un serveur MySql doit être installé
   * UWAMP : sur le site de "UWAMP", lire "Prerequisites IMPORTANT!!" (vous devez installer une des distributions Visual C++, j'ai choisi la plus récente) 
   * UWAMP : installer la version "EXE" (Choisir : Télécharger Exe/Install) est préférable à la version "PORTABLE"
@@ -110,10 +110,10 @@ Le "début de la fin"
 	* Modifier "MA" requête par votre requête
     * Cliquer avec le bouton droit sur l'onglet de ce fichier et choisir "run" (CTRL-MAJ-F10)	  
 	  
-A) Modifier MES requêtes AFFICHER (READ) du CRUD(Create Read Update Delete) sur la table "t_genre"
+A) Modifier MES requêtes AFFICHER (READ) du CRUD(Create Read Update Delete) sur la table "t_donneur"
   *	Ouvrir le fichier "genres/gestion_genres_crud.py"
-  * Modifier les requêtes "SELECT" sur la table "t_genre" par des "SELECT" sur une de vos "t_????"
-  * Modifier dans le répertoire "TEMPLATES" la page html consacrée à l'affichage pour ma "t_genre", il faut ouvrir "templates/genres_afficher.html"
+  * Modifier les requêtes "SELECT" sur la table "t_donneur" par des "SELECT" sur une de vos "t_????"
+  * Modifier dans le répertoire "TEMPLATES" la page html consacrée à l'affichage pour ma "t_donneur", il faut ouvrir "templates/genres_afficher.html"
   * Vous devez vous aider de "CTRL-R"(scope : fichier) ou "CTRL-SHIFT-R"(scope : tout le projet)
   * utiliser la commande "magique" de "PyCharm" comparer deux fichiers "CTRL-D" (menu "View"-->"Compare With...") entre le fichier de mon projet qui fonctionne et le votre qui est presque fonctionnel.
 
@@ -123,11 +123,11 @@ B) Une fois que l'affichage est fonctionnel et uniquement dans ce cas :
 
 C) Faites souvent des "COMMITS" et des "PUSH" sur votre "GITHUB" (VOTRENOM_VOTREPRENOM_VOTRECLASSE_VOTRESUJET_164_V3TABLES)
 
-D) Recommencer les étapes A) à C) pour l'action "CREATE" pour la table "t_genre"
+D) Recommencer les étapes A) à C) pour l'action "CREATE" pour la table "t_donneur"
 
-E) Recommencer les étapes A) à C) pour l'action "UPDATE" pour la table "t_genre"
+E) Recommencer les étapes A) à C) pour l'action "UPDATE" pour la table "t_donneur"
 
-F) Recommencer les étapes A) à C) pour l'action "DELETE" pour la table "t_genre"
+F) Recommencer les étapes A) à C) pour l'action "DELETE" pour la table "t_donneur"
 
 G) Passez à une autre table (MAIS PAS UNE TABLE INTERMÉDIAIRE) de votre BD
 

@@ -17,36 +17,34 @@ from APP_FILMS_164.erreurs.exceptions import *
     Nom : films_genres_afficher
     Auteur : OM 2021.05.01
     Définition d'une "route" /films_genres_afficher
-    
+
     But : Afficher les films avec les genres associés pour chaque film.
-    
+
     Paramètres : id_donneur_sel = 0 >> tous les films.
                  id_donneur_sel = "n" affiche le film dont l'id est "n"
-                 
+
 """
 
 
-@app.route("/films_genres_afficher/<int:id_film_sel>", methods=['GET', 'POST'])
-def films_genres_afficher(id_film_sel):
-    print(" films_genres_afficher id_film_sel ", id_film_sel)
+@app.route("/films_genres_afficher/<int:id_receveur_sel>", methods=['GET', 'POST'])
+def films_genres_afficher(id_receveur_sel):
+    print(" films_genres_afficher id_receveur_sel ", id_receveur_sel)
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
-                strsql_genres_films_afficher_data = """SELECT id_film, nom_film, duree_film, description_film, cover_link_film, date_sortie_film,
-                                                            GROUP_CONCAT(intitule_genre) as GenresFilms FROM t_genre_film
-                                                            RIGHT JOIN t_film ON t_film.id_film = t_genre_film.fk_film
-                                                            LEFT JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
-                                                            GROUP BY id_film"""
-                if id_film_sel == 0:
+                # strsql_genres_films_afficher_data = """SELECT id_receveur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin from t_receveur ORDER BY id_receveur ASC"""
+                strsql_genres_films_afficher_data = """SELECT * FROM t_receveur ORDER BY id_receveur ASC"""
+
+                if id_receveur_sel == 0:
                     # le paramètre 0 permet d'afficher tous les films
                     # Sinon le paramètre représente la valeur de l'id du film
                     mc_afficher.execute(strsql_genres_films_afficher_data)
                 else:
                     # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
-                    valeur_id_film_selected_dictionnaire = {"value_id_film_selected": id_film_sel}
+                    valeur_id_film_selected_dictionnaire = {"value_id_receveur_selected": id_receveur_sel}
                     # En MySql l'instruction HAVING fonctionne comme un WHERE... mais doit être associée à un GROUP BY
                     # L'opérateur += permet de concaténer une nouvelle valeur à la valeur de gauche préalablement définie.
-                    strsql_genres_films_afficher_data += """ HAVING id_film= %(value_id_film_selected)s"""
+                    strsql_genres_films_afficher_data += """ HAVING id_receveur = %(value_id_receveur_selected)s"""
 
                     mc_afficher.execute(strsql_genres_films_afficher_data, valeur_id_film_selected_dictionnaire)
 
@@ -55,11 +53,11 @@ def films_genres_afficher(id_film_sel):
                 print("data_genres ", data_genres_films_afficher, " Type : ", type(data_genres_films_afficher))
 
                 # Différencier les messages.
-                if not data_genres_films_afficher and id_film_sel == 0:
-                    flash("""La table "t_film" est vide. !""", "warning")
-                elif not data_genres_films_afficher and id_film_sel > 0:
-                    # Si l'utilisateur change l'id_film dans l'URL et qu'il ne correspond à aucun film
-                    flash(f"Le film {id_film_sel} demandé n'existe pas !!", "warning")
+                if not data_genres_films_afficher and id_receveur_sel == 0:
+                    flash("""La table "t_receveur" est vide. !""", "warning")
+                elif not data_genres_films_afficher and id_receveur_sel > 0:
+                    # Si l'utilisateur change l'id_receveur dans l'URL et qu'il ne correspond à aucun film
+                    flash(f"Le film {id_receveur_sel} demandé n'existe pas !!", "warning")
                 else:
                     flash(f"Données films et genres affichés !!", "success")
 
@@ -77,9 +75,9 @@ def films_genres_afficher(id_film_sel):
     On obtient un objet "objet_dumpbd"
 
     Récupère la liste de tous les genres du film sélectionné par le bouton "MODIFIER" de "films_genres_afficher.html"
-    
+
     Dans une liste déroulante particulière (tags-selector-tagselect), on voit :
-    1) Tous les genres contenus dans la "t_genre".
+    1) Tous les genres contenus dans la "t_donneur".
     2) Les genres attribués au film selectionné.
     3) Les genres non-attribués au film sélectionné.
 
@@ -93,15 +91,15 @@ def edit_genre_film_selected():
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
-                strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genre ORDER BY id_genre ASC"""
+                strsql_genres_afficher = """SELECT id_donneur, intitule_genre FROM t_donneur ORDER BY id_donneur ASC"""
                 mc_afficher.execute(strsql_genres_afficher)
             data_genres_all = mc_afficher.fetchall()
             print("dans edit_genre_film_selected ---> data_genres_all", data_genres_all)
 
-            # Récupère la valeur de "id_film" du formulaire html "films_genres_afficher.html"
-            # l'utilisateur clique sur le bouton "Modifier" et on récupère la valeur de "id_film"
+            # Récupère la valeur de "id_receveur" du formulaire html "films_genres_afficher.html"
+            # l'utilisateur clique sur le bouton "Modifier" et on récupère la valeur de "id_receveur"
             # grâce à la variable "id_film_genres_edit_html" dans le fichier "films_genres_afficher.html"
-            # href="{{ url_for('edit_genre_film_selected', id_film_genres_edit_html=row.id_film) }}"
+            # href="{{ url_for('edit_genre_film_selected', id_film_genres_edit_html=row.id_receveur) }}"
             id_film_genres_edit = request.values['id_film_genres_edit_html']
 
             # Mémorise l'id du film dans une variable de session
@@ -110,7 +108,7 @@ def edit_genre_film_selected():
             session['session_id_film_genres_edit'] = id_film_genres_edit
 
             # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
-            valeur_id_film_selected_dictionnaire = {"value_id_film_selected": id_film_genres_edit}
+            valeur_id_film_selected_dictionnaire = {"value_id_receveur_selected": id_film_genres_edit}
 
             # Récupère les données grâce à 3 requêtes MySql définie dans la fonction genres_films_afficher_data
             # 1) Sélection du film choisi
@@ -121,20 +119,20 @@ def edit_genre_film_selected():
                 genres_films_afficher_data(valeur_id_film_selected_dictionnaire)
 
             print(data_genre_film_selected)
-            lst_data_film_selected = [item['id_film'] for item in data_genre_film_selected]
+            lst_data_film_selected = [item['id_receveur'] for item in data_genre_film_selected]
             print("lst_data_film_selected  ", lst_data_film_selected,
                   type(lst_data_film_selected))
 
             # Dans le composant "tags-selector-tagselect" on doit connaître
             # les genres qui ne sont pas encore sélectionnés.
-            lst_data_genres_films_non_attribues = [item['id_genre'] for item in data_genres_films_non_attribues]
+            lst_data_genres_films_non_attribues = [item['id_donneur'] for item in data_genres_films_non_attribues]
             session['session_lst_data_genres_films_non_attribues'] = lst_data_genres_films_non_attribues
             print("lst_data_genres_films_non_attribues  ", lst_data_genres_films_non_attribues,
                   type(lst_data_genres_films_non_attribues))
 
             # Dans le composant "tags-selector-tagselect" on doit connaître
             # les genres qui sont déjà sélectionnés.
-            lst_data_genres_films_old_attribues = [item['id_genre'] for item in data_genres_films_attribues]
+            lst_data_genres_films_old_attribues = [item['id_donneur'] for item in data_genres_films_attribues]
             session['session_lst_data_genres_films_old_attribues'] = lst_data_genres_films_old_attribues
             print("lst_data_genres_films_old_attribues  ", lst_data_genres_films_old_attribues,
                   type(lst_data_genres_films_old_attribues))
@@ -146,7 +144,7 @@ def edit_genre_film_selected():
                   type(data_genres_films_attribues))
 
             # Extrait les valeurs contenues dans la table "t_genres", colonne "intitule_genre"
-            # Le composant javascript "tagify" pour afficher les tags n'a pas besoin de l'id_genre
+            # Le composant javascript "tagify" pour afficher les tags n'a pas besoin de l'id_donneur
             lst_data_genres_films_non_attribues = [item['intitule_genre'] for item in data_genres_films_non_attribues]
             print("lst_all_genres gf_edit_genre_film_selected ", lst_data_genres_films_non_attribues,
                   type(lst_data_genres_films_non_attribues))
@@ -167,9 +165,9 @@ def edit_genre_film_selected():
     nom: update_genre_film_selected
 
     Récupère la liste de tous les genres du film sélectionné par le bouton "MODIFIER" de "films_genres_afficher.html"
-    
+
     Dans une liste déroulante particulière (tags-selector-tagselect), on voit :
-    1) Tous les genres contenus dans la "t_genre".
+    1) Tous les genres contenus dans la "t_donneur".
     2) Les genres attribués au film selectionné.
     3) Les genres non-attribués au film sélectionné.
 
@@ -209,22 +207,22 @@ def update_genre_film_selected():
 
             # Pour apprécier la facilité de la vie en Python... "les ensembles en Python"
             # https://fr.wikibooks.org/wiki/Programmation_Python/Ensembles
-            # OM 2021.05.02 Une liste de "id_genre" qui doivent être effacés de la table intermédiaire "t_genre_film".
+            # OM 2021.05.02 Une liste de "id_donneur" qui doivent être effacés de la table intermédiaire "t_genre_film".
             lst_diff_genres_delete_b = list(set(old_lst_data_genres_films_attribues) -
                                             set(new_lst_int_genre_film_old))
             print("lst_diff_genres_delete_b ", lst_diff_genres_delete_b)
 
-            # Une liste de "id_genre" qui doivent être ajoutés à la "t_genre_film"
+            # Une liste de "id_donneur" qui doivent être ajoutés à la "t_genre_film"
             lst_diff_genres_insert_a = list(
                 set(new_lst_int_genre_film_old) - set(old_lst_data_genres_films_attribues))
             print("lst_diff_genres_insert_a ", lst_diff_genres_insert_a)
 
             # SQL pour insérer une nouvelle association entre
-            # "fk_film"/"id_film" et "fk_genre"/"id_genre" dans la "t_genre_film"
+            # "fk_film"/"id_receveur" et "fk_genre"/"id_donneur" dans la "t_genre_film"
             strsql_insert_genre_film = """INSERT INTO t_genre_film (id_genre_film, fk_genre, fk_film)
                                                     VALUES (NULL, %(value_fk_genre)s, %(value_fk_film)s)"""
 
-            # SQL pour effacer une (des) association(s) existantes entre "id_film" et "id_genre" dans la "t_genre_film"
+            # SQL pour effacer une (des) association(s) existantes entre "id_receveur" et "id_donneur" dans la "t_genre_film"
             strsql_delete_genre_film = """DELETE FROM t_genre_film WHERE fk_genre = %(value_fk_genre)s AND fk_film = %(value_fk_film)s"""
 
             with DBconnection() as mconn_bd:
@@ -259,7 +257,7 @@ def update_genre_film_selected():
 
     # Après cette mise à jour de la table intermédiaire "t_genre_film",
     # on affiche les films et le(urs) genre(s) associé(s).
-    return redirect(url_for('films_genres_afficher', id_film_sel=id_film_selected))
+    return redirect(url_for('films_genres_afficher', id_receveur_sel=id_film_selected))
 
 
 """
@@ -276,25 +274,25 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
     print("valeur_id_film_selected_dict...", valeur_id_film_selected_dict)
     try:
 
-        strsql_film_selected = """SELECT id_film, nom_film, duree_film, description_film, cover_link_film, date_sortie_film, GROUP_CONCAT(id_genre) as GenresFilms FROM t_genre_film
-                                        INNER JOIN t_film ON t_film.id_film = t_genre_film.fk_film
-                                        INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
-                                        WHERE id_film = %(value_id_film_selected)s"""
+        strsql_film_selected = """SELECT id_receveur, nom_film, duree_film, description_film, cover_link_film, date_sortie_film, GROUP_CONCAT(id_donneur) as GenresFilms FROM t_genre_film
+                                        INNER JOIN t_receveur ON t_receveur.id_receveur = t_genre_film.fk_film
+                                        INNER JOIN t_donneur ON t_donneur.id_donneur = t_genre_film.fk_genre
+                                        WHERE id_receveur = %(value_id_receveur_selected)s"""
 
-        strsql_genres_films_non_attribues = """SELECT id_genre, intitule_genre FROM t_genre WHERE id_genre not in(SELECT id_genre as idGenresFilms FROM t_genre_film
-                                                    INNER JOIN t_film ON t_film.id_film = t_genre_film.fk_film
-                                                    INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
-                                                    WHERE id_film = %(value_id_film_selected)s)"""
+        strsql_genres_films_non_attribues = """SELECT id_donneur, intitule_genre FROM t_donneur WHERE id_donneur not in(SELECT id_donneur as idGenresFilms FROM t_genre_film
+                                                    INNER JOIN t_receveur ON t_receveur.id_receveur = t_genre_film.fk_film
+                                                    INNER JOIN t_donneur ON t_donneur.id_donneur = t_genre_film.fk_genre
+                                                    WHERE id_receveur = %(value_id_receveur_selected)s)"""
 
-        strsql_genres_films_attribues = """SELECT id_film, id_genre, intitule_genre FROM t_genre_film
-                                            INNER JOIN t_film ON t_film.id_film = t_genre_film.fk_film
-                                            INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
-                                            WHERE id_film = %(value_id_film_selected)s"""
+        strsql_genres_films_attribues = """SELECT id_receveur, id_donneur, intitule_genre FROM t_genre_film
+                                            INNER JOIN t_receveur ON t_receveur.id_receveur = t_genre_film.fk_film
+                                            INNER JOIN t_donneur ON t_donneur.id_donneur = t_genre_film.fk_genre
+                                            WHERE id_receveur = %(value_id_receveur_selected)s"""
 
         # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
         with DBconnection() as mc_afficher:
             # Envoi de la commande MySql
-            mc_afficher.execute(strsql_genres_films_non_attribues, valeur_id_film_selected_dict)
+            mc_afficher.execute(strsql_genres_films_non_attribues,  )
             # Récupère les données de la requête.
             data_genres_films_non_attribues = mc_afficher.fetchall()
             # Affichage dans la console

@@ -227,7 +227,7 @@ def genre_update_wtf():
             # Affiche seulement la valeur modifiée, "ASC" et l'"id_donneur"
             return redirect(url_for('genres_afficher', order_by="ASC", id_donneur_sel=0))
         elif request.method == "GET":
-            # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
+            # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_donneur"
             # str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
             str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
 
@@ -276,7 +276,7 @@ def genre_update_wtf():
 def genre_delete_wtf():
     data_films_attribue_genre_delete = None
     btn_submit_del = None
-    # L'utilisateur vient de cliquer sur le bouton "DELETE". Récupère la valeur de "id_genre"
+    # L'utilisateur vient de cliquer sur le bouton "DELETE". Récupère la valeur de "id_donneur"
     id_donneur_delete = request.values['id_donneur_btn_delete_html']
 
     # Objet formulaire pour effacer le genre sélectionné.
@@ -333,7 +333,7 @@ def genre_delete_wtf():
                 # le formulaire "genres/genre_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
                 session['data_films_attribue_genre_delete'] = data_films_attribue_genre_delete
 
-                # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_genre"
+                # Opération sur la BD pour récupérer "id_donneur" et "intitule_genre" de la "t_donneur"
                 str_sql_id_genre = "SELECT id_donneur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin FROM t_donneur WHERE id_donneur = %(value_id_donneur)s"
 
                 mydb_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
@@ -345,12 +345,19 @@ def genre_delete_wtf():
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "genre_delete_wtf.html"
             form_delete.nom_prenom_delete_wtf.data = data_nom_donneur["prenom"]
-            form_delete.nom_nom_delete_wtf.data = data_nom_donneur["nom"]
-            form_delete.nom_adresse_delete_wtf.data = data_nom_donneur["adresse"]
-            form_delete.nom_mail_delete_wtf.data = data_nom_donneur["mail"]
-            form_delete.nom_num_tel_delete_wtf.data = data_nom_donneur["num_tel"]
-            form_delete.nom_date_naissance_delete_wtf.data = data_nom_donneur["date_naissance"]
-            form_delete.nom_groupe_sanguin_delete_wtf.data = data_nom_donneur["groupe_sanguin"]
+            form_delete.nom_nom_delete_wtf.data = data_nom_donneur["prenom"]
+            form_delete.nom_adresse_delete_wtf.data = data_nom_donneur["prenom"]
+            form_delete.nom_mail_delete_wtf.data = data_nom_donneur["prenom"]
+            form_delete.nom_num_tel_delete_wtf.data = data_nom_donneur["prenom"]
+            form_delete.nom_date_naissance_delete_wtf.data = data_nom_donneur["prenom"]
+            form_delete.nom_groupe_sanguin_delete_wtf.data = data_nom_donneur["prenom"]
+            # form_delete.nom_prenom_delete_wtf.data = data_nom_donneur["Prénom"]
+            # form_delete.nom_nom_delete_wtf.data = data_nom_donneur["Nom"]
+            # form_delete.nom_adresse_delete_wtf.data = data_nom_donneur["Adresse"]
+            # form_delete.nom_mail_delete_wtf.data = data_nom_donneur["Mail"]
+            # form_delete.nom_num_tel_delete_wtf.data = data_nom_donneur["Numéro de Téléphone"]
+            # form_delete.nom_date_naissance_delete_wtf.data = data_nom_donneur["Date de Naissance"]
+            # form_delete.nom_groupe_sanguin_delete_wtf.data = data_nom_donneur["Groupe Sanguin"]
 
 
             # Le bouton pour l'action "DELETE" dans le form. "genre_delete_wtf.html" est caché.

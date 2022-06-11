@@ -27,39 +27,6 @@ Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_updat
             le contrôle de la saisie s'effectue ici en Python dans le fichier ""
             On ne doit pas accepter un champ vide.
 """
-"""
-    Auteur : OM 2021.03.16
-    Définition d'une "route" /genres_afficher
-
-    Test : ex : http://127.0.0.1:5005/genres_afficher
-
-    Paramètres : order_by : ASC : Ascendant, DESC : Descendant
-                id_donneur_sel = 0 >> tous les genres.
-                id_donneur_sel = "n" affiche le genre dont l'id est "n"
-"""
-
-
-
-"""
-    Auteur : OM 2021.03.22
-    Définition d'une "route" /genres_ajouter
-
-    Test : ex : http://127.0.0.1:5005/genres_ajouter
-
-    Paramètres : sans
-
-    But : Ajouter un genre pour un film
-
-    Remarque :  Dans le champ "name_genre_html" du formulaire "genres/genres_ajouter.html",
-                le contrôle de la saisie s'effectue ici en Python.
-                On transforme la saisie en minuscules.
-                On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
-                des valeurs avec des caractères qui ne sont pas des lettres.
-                Pour comprendre [A-Za-zÀ-ÖØ-öø-ÿ] il faut se reporter à la table ASCII https://www.ascii-code.com/
-                Accepte le trait d'union ou l'apostrophe, et l'espace entre deux mots, mais pas plus d'une occurence.
-"""
-
-
 @app.route("/film_add", methods=['GET', 'POST'])
 def film_add_wtf():
     # Objet formulaire pour AJOUTER un film
@@ -67,20 +34,43 @@ def film_add_wtf():
     if request.method == "POST":
         try:
             if form_add_receveur.validate_on_submit():
-                nom_film_add = form_add_receveur.nom_film_add_wtf.data
+                nom_prenom_receveur_add_wtf = form_add_receveur.nom_prenom_receveur_add_wtf.data
+                nom_nom_receveur_add_wtf = form_add_receveur.nom_nom_receveur_add_wtf.data
+                nom_adresse_receveur_add_wtf = form_add_receveur.nom_adresse_receveur_add_wtf.data
+                nom_mail_receveur_add_wtf = form_add_receveur.nom_mail_receveur_add_wtf.data
+                nom_num_tel_receveur_add_wtf = form_add_receveur.nom_num_tel_receveur_add_wtf.data
+                nom_date_naissance_receveur_add_wtf = form_add_receveur.nom_date_naissance_receveur_add_wtf.data
+                nom_groupe_sanguin_receveur_add_wtf = form_add_receveur.nom_groupe_sanguin_receveur_add_wtf.data
 
-                valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add}
+
+                valeurs_insertion_dictionnaire = {"value_name_prenom_receveur_add":
+                                                  nom_prenom_receveur_add_wtf,
+                                                  "value_name_nom_receveur_add":
+                                                      nom_nom_receveur_add_wtf,
+                                                  "value_name_adresse_receveur_add":
+                                                      nom_adresse_receveur_add_wtf,
+                                                  "value_name_mail_receveur_add":
+                                                      nom_mail_receveur_add_wtf,
+                                                  "value_name_num_tel_receveur_add":
+                                                      nom_num_tel_receveur_add_wtf,
+                                                  "value_name_date_naissance_receveur_add":
+                                                      nom_date_naissance_receveur_add_wtf,
+                                                  "value_name_groupe_sanguin_receveur_add":
+                                                      nom_groupe_sanguin_receveur_add_wtf
+                                                  }
+
+
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_receveur (id_receveur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom)s,%(value_name_nom)s,%(value_name_adresse)s,%(value_name_mail)s,%(value_name_num_tel)s,%(value_name_date_naissance)s,%(value_name_groupe_sanguin)s )"""
+                strsql_insert_film = """INSERT INTO t_receveur (id_receveur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom_receveur_add)s,%(value_name_nom_receveur_add)s,%(value_name_adresse_receveur_add)s,%(value_name_mail_receveur_add)s,%(value_name_num_tel_receveur_add)s,%(value_name_date_naissance)s,%(value_name_date_naissance_receveur_add)s )"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
                 flash(f"Données insérées !!", "success")
                 print(f"Données insérées !!")
 
-                # Pour afficher et constater l'insertion du nouveau film (id_film_sel=0 => afficher tous les films)
-                return redirect(url_for('films_genres_afficher', id_film_sel=0))
+                # Pour afficher et constater l'insertion du nouveau film (id_receveur_sel=0 => afficher tous les films)
+                return redirect(url_for('receveur_afficher', id_receveur_sel=0))
 
         except Exception as Exception_genres_ajouter_wtf:
             raise ExceptionGenresAjouterWtf(f"fichier : {Path(__file__).name}  ;  "
@@ -90,7 +80,7 @@ def film_add_wtf():
     return render_template("films/film_add_wtf.html", form_add_receveur=form_add_receveur)
 
 
-"""Editer(update) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
+"""Editer(update) un film qui a été sélectionné dans le formulaire "receveur_afficher.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_update
 
@@ -108,7 +98,7 @@ Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_updat
 
 @app.route("/film_update", methods=['GET', 'POST'])
 def film_update_wtf():
-    # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_film"
+    # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_receveur"
     id_film_update = request.values['id_film_btn_edit_html']
 
     # Objet formulaire pour l'UPDATE
@@ -130,11 +120,11 @@ def film_update_wtf():
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_nom_film = """UPDATE t_film SET nom_film = %(value_nom_film)s,
+            str_sql_update_nom_film = """UPDATE t_receveur SET nom_film = %(value_nom_film)s,
                                                             duree_film = %(value_duree_film)s,
                                                             description_film = %(value_description_film)s,
                                                             date_sortie_film = %(value_datesortie_film)s
-                                                            WHERE id_film = %(value_id_film)s"""
+                                                            WHERE id_receveur = %(value_id_film)s"""
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_nom_film, valeur_update_dictionnaire)
 
@@ -143,10 +133,10 @@ def film_update_wtf():
 
             # afficher et constater que la donnée est mise à jour.
             # Afficher seulement le film modifié, "ASC" et l'"id_film_update"
-            return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
+            return redirect(url_for('receveur_afficher', id_receveur_sel=id_film_update))
         elif request.method == "GET":
-            # Opération sur la BD pour récupérer "id_film" et "intitule_genre" de la "t_genre"
-            str_sql_id_film = "SELECT * FROM t_film WHERE id_film = %(value_id_film)s"
+            # Opération sur la BD pour récupérer "id_receveur" et "intitule_genre" de la "t_donneur"
+            str_sql_id_film = "SELECT * FROM t_receveur WHERE id_receveur = %(value_id_film)s"
             valeur_select_dictionnaire = {"value_id_film": id_film_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
@@ -170,7 +160,7 @@ def film_update_wtf():
     return render_template("films/film_update_wtf.html", form_update_film=form_update_film)
 
 
-"""Effacer(delete) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
+"""Effacer(delete) un film qui a été sélectionné dans le formulaire "receveur_afficher.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_delete
     
@@ -188,15 +178,15 @@ def film_delete_wtf():
     # Pour afficher ou cacher les boutons "EFFACER"
     data_film_delete = None
     btn_submit_del = None
-    # L'utilisateur vient de cliquer sur le bouton "DELETE". Récupère la valeur de "id_film"
-    id_film_delete = request.values['id_film_btn_delete_html']
+    # L'utilisateur vient de cliquer sur le bouton "DELETE". Récupère la valeur de "id_receveur"
+    id_film_delete = request.values['id_receveur_btn_delete_html']
 
     # Objet formulaire pour effacer le film sélectionné.
     form_delete_film = FormWTFDeleteFilm()
     try:
         # Si on clique sur "ANNULER", afficher tous les films.
         if form_delete_film.submit_btn_annuler.data:
-            return redirect(url_for("films_genres_afficher", id_film_sel=0))
+            return redirect(url_for("receveur_afficher", id_receveur_sel=0))
 
         if form_delete_film.submit_btn_conf_del_film.data:
             # Récupère les données afin d'afficher à nouveau
@@ -215,7 +205,7 @@ def film_delete_wtf():
             print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
             str_sql_delete_fk_film_genre = """DELETE FROM t_genre_film WHERE fk_film = %(value_id_film)s"""
-            str_sql_delete_film = """DELETE FROM t_film WHERE id_film = %(value_id_film)s"""
+            str_sql_delete_film = """DELETE FROM t_receveur WHERE id_receveur = %(value_id_film)s"""
             # Manière brutale d'effacer d'abord la "fk_film", même si elle n'existe pas dans la "t_genre_film"
             # Ensuite on peut effacer le film vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
             with DBconnection() as mconn_bd:
@@ -226,13 +216,13 @@ def film_delete_wtf():
             print(f"Film définitivement effacé !!")
 
             # afficher les données
-            return redirect(url_for('films_genres_afficher', id_film_sel=0))
+            return redirect(url_for('receveur_afficher', id_receveur_sel=0))
         if request.method == "GET":
             valeur_select_dictionnaire = {"value_id_film": id_film_delete}
             print(id_film_delete, type(id_film_delete))
 
             # Requête qui affiche le film qui doit être efffacé.
-            str_sql_genres_films_delete = """SELECT * FROM t_film WHERE id_film = %(value_id_film)s"""
+            str_sql_genres_films_delete = """SELECT * FROM t_receveur WHERE id_receveur = %(value_id_film)s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)

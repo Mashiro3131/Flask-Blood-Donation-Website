@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Ajouter un FILM (WTF) {% endblock %}
+{% block title %} Ajouter un RECEVEUR (WTF) {% endblock %}
 {% block body %}
 <div class="container">
 	<div class="row">
@@ -12,13 +12,57 @@
 				{{ form_add_film.hidden_tag() }}
 				<div class="form-group">
 					<p>
-						{{ form_add_film.nom_film_add_wtf.label }}<br>
-						{{ form_add_film.nom_film_add_wtf(size=32) }}<br>
-						{% for error in form_add_film.nom_film_add_wtf.errors %}
+						{{ form_add_film.hidden_tag() }}
+						{{ form_add_film.nom_prenom_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_prenom_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_prenom_receveur_add_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
-					Voilà c'est juste pour vous montrer l'ossature du projet je n'ai pas tout fait...
+										<p>
+											{{ form_add_film.hidden_tag() }}
+						{{ form_add_film.nom_nom_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_nom_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_nom_receveur_add_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+										<p>
+						{{ form_add_film.nom_adresse_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_adresse_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_adresse_receveur_add_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+										<p>
+						{{ form_add_film.nom_mail_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_mail_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_mail_receveur_add_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+										<p>
+						{{ form_add_film.nom_num_tel_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_num_tel_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_num_tel_receveur_add_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+										<p>
+						{{ form_add_film.nom_date_naissance_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_date_naissance_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_date_naissance_receveur_add_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+										<p>
+						{{ form_add_film.nom_groupe_sanguin_receveur_add_wtf.label }}<br>
+						{{ form_add_film.nom_groupe_sanguin_receveur_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_groupe_sanguin_receveur_add_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+					Ce module m'a aspiré ma vie et mon énergie à 2000000000%... RDV l'année en 1ère année...
 				</div>
 				{{ form_add_film.submit(class="btn btn-primary") }}
 			</form>

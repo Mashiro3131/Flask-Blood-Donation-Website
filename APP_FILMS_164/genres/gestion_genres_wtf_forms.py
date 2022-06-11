@@ -159,75 +159,81 @@ class FormWTFUpdateDonneur(FlaskForm):
 
 class FormWTFDeleteDonneur(FlaskForm):
 
-    nom_prenom_delete_regexp = ""
-    nom_prenom_delete_wtf = StringField("Prénom", validators=[Length(min=0, max=20, message="min 2 max 20"),
-                                                                          Regexp(nom_prenom_delete_regexp,
-                                                                                 message="Pas de chiffres, de "
-                                                                                         "caractères "
-                                                                                         "spéciaux, "
-                                                                                         "d'espace à double, de double "
-                                                                                         "apostrophe, de double trait "
-                                                                                         "union")
-                                                                          ])
-    nom_nom_delete_regexp = ""
-    nom_nom_delete_wtf = StringField("Nom", validators=[Length(min=0, max=20, message="min 0 max 20"),
-                                                 Regexp(nom_nom_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    nom_adresse_delete_regexp = ""
-    nom_adresse_delete_wtf = StringField("Adresse", validators=[Length(min=0, max=20, message="min 2 max 20"),
-                                                 Regexp(nom_adresse_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    nom_mail_delete_regexp = ""
-    nom_mail_delete_wtf = StringField("Mail", validators=[Length(min=0, max=50, message="min 2 max 20"),
-                                                 Regexp(nom_mail_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    nom_num_tel_delete_regexp = ""
-    nom_num_tel_delete_wtf = StringField("Numéro de Téléphone ", validators=[Length(min=0, max=50, message="min 0 max 20"),
-                                                 Regexp(nom_num_tel_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    nom_date_naissance_delete_regexp = ""
-    nom_date_naissance_delete_wtf = StringField("Date de naissance", validators=[Length(min=0, max=100, message="min 0 max 20"),
-                                                 Regexp(nom_date_naissance_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    nom_groupe_sanguin_delete_regexp = ""
-    nom_groupe_sanguin_delete_wtf = StringField("Groupe sanguin", validators=[Length(min=0, max=100, message="min 2 max 20"),
-                                                 Regexp(nom_groupe_sanguin_delete_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-
-    submit = SubmitField("Etes-vous sûr d'effacer ????")
+    # nom_prenom_delete_regexp = ""
+    # nom_prenom_delete_wtf = StringField("Prénom", validators=[Length(min=0, max=20, message="min 2 max 20"),
+    #                                                                       Regexp(nom_prenom_delete_regexp,
+    #                                                                              message="Pas de chiffres, de "
+    #                                                                                      "caractères "
+    #                                                                                      "spéciaux, "
+    #                                                                                      "d'espace à double, de double "
+    #                                                                                      "apostrophe, de double trait "
+    #                                                                                      "union")
+    #                                                                       ])
+    # nom_nom_delete_regexp = ""
+    # nom_nom_delete_wtf = StringField("Nom", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    #                                              Regexp(nom_nom_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
+    # nom_adresse_delete_regexp = ""
+    # nom_adresse_delete_wtf = StringField("Adresse", validators=[Length(min=0, max=20, message="min 0 max 20"),
+    #                                              Regexp(nom_adresse_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
+    # nom_mail_delete_regexp = ""
+    # nom_mail_delete_wtf = StringField("Mail", validators=[Length(min=0, max=50, message="min 0 max 20"),
+    #                                              Regexp(nom_mail_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
+    # nom_num_tel_delete_regexp = ""
+    # nom_num_tel_delete_wtf = StringField("Numéro de Téléphone", validators=[Length(min=0, max=50, message="min 0 max 20"),
+    #                                              Regexp(nom_num_tel_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
+    # nom_date_naissance_delete_regexp = ""
+    # nom_date_naissance_delete_wtf = StringField("Date de Naissance", validators=[Length(min=0, max=100, message="min 0 max 20"),
+    #                                              Regexp(nom_date_naissance_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
+    # nom_groupe_sanguin_delete_regexp = ""
+    # nom_groupe_sanguin_delete_wtf = StringField("Groupe Sanguin", validators=[Length(min=0, max=100, message="min 2 max 20"),
+    #                                              Regexp(nom_groupe_sanguin_delete_regexp,
+    #                                                     message="Pas de chiffres, de caractères "
+    #                                                             "spéciaux, "
+    #                                                             "d'espace à double, de double "
+    #                                                             "apostrophe, de double trait union")
+    #                                              ])
+    #
+    # submit = SubmitField("Êtes-vous sûr d'effacer ?")
     """
         Dans le formulaire "genre_delete_wtf.html"
 
         nom_genre_delete_wtf : Champ qui reçoit la valeur du genre, lecture seule. (readonly=true)
         submit_btn_del : Bouton d'effacement "DEFINITIF".
         submit_btn_conf_del : Bouton de confirmation pour effacer un "genre".
-        submit_btn_annuler : Bouton qui permet d'afficher la table "t_genre".
+        submit_btn_annuler : Bouton qui permet d'afficher la table "t_donneur".
     """
-    nom_genre_delete_wtf = StringField("Effacer ce donneur")
-    submit_btn_del = SubmitField("Effacer ce donneur genre")
-    submit_btn_conf_del = SubmitField("Etes-vous sûr d'effacer ????")
+    nom_prenom_delete_wtf = StringField("Prénom")
+    nom_nom_delete_wtf = StringField("Nom")
+    nom_mail_delete_wtf = StringField("Adresse")
+    nom_adresse_delete_wtf = StringField("Mail")
+    nom_num_tel_delete_wtf = StringField("Numéro de Téléphone")
+    nom_date_naissance_delete_wtf = StringField("Date de Naissance")
+    nom_groupe_sanguin_delete_wtf = StringField("Groupe Sanguin")
+    submit_btn_del = SubmitField("Effacer le donneur")
+    submit_btn_conf_del = SubmitField("Définitivement supprimer")
     submit_btn_annuler = SubmitField("Annuler!!")
