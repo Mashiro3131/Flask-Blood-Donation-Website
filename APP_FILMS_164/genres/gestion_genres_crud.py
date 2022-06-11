@@ -236,7 +236,7 @@ def genre_update_wtf():
                 mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
             data_nom_prenom = mybd_conn.fetchone()
-            print("data_nom_prenom ", data_nom_prenom, " type ", type(data_nom_prenom), " prenom ",
+            print("data_nom_prenom ", data_nom_prenom, " type ", type(data_nom_prenom), " genre ",
                   data_nom_prenom["prenom"])
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "genre_update_wtf.html"

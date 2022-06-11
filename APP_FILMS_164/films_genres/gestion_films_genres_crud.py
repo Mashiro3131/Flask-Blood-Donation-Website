@@ -59,7 +59,7 @@ def films_genres_afficher(id_receveur_sel):
                     # Si l'utilisateur change l'id_receveur dans l'URL et qu'il ne correspond à aucun film
                     flash(f"Le film {id_receveur_sel} demandé n'existe pas !!", "warning")
                 else:
-                    flash(f"Données films et genres affichés !!", "success")
+                    flash(f"Receveurs affichés !!", "success")
 
         except Exception as Exception_films_genres_afficher:
             raise ExceptionFilmsGenresAfficher(f"fichier : {Path(__file__).name}  ;  {films_genres_afficher.__name__} ;"

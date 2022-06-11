@@ -38,8 +38,10 @@
 <div class="container">
 	<nav style='display:flex; align-items:center; justify-content:center;' class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
 		<div class="container-fluid">
-			<img src="static/MyFinalLogo.png" class="img-fluid"  width="70" height="34" href="http://127.0.0.1:5500/">
-			<a class="navbar-brand" href="{{ url_for('mapagepricipale') }}"></a>
+			<a class="navbar-brand" href="{{ url_for('mapagepricipale') }}">
+				<img src="static/MyFinalLogo.png" class="img-fluid"  width="65" height="29" href="http://127.0.0.1:5500/">
+			</a>
+
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -50,36 +52,23 @@
 						<!--		Afficher la liste des genres dans l'ordre (ASC) et tous les genres (0)-->
 						<a class="nav-link" href="{{ url_for('genres_afficher', order_by='ASC', id_donneur_sel=0) }}">Donneurs</a>
 						</center>
+						<li><a class="nav-link" href="{{ url_for('films_genres_afficher', id_receveur_sel=0) }}">Receveur</a>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navdropdownfilms" role="button"
-						   data-bs-toggle="dropdown" aria-expanded="false">
-							Films
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="nav-link" href="{{ url_for('films_genres_afficher', id_receveur_sel=0) }}">Films</a>
-							</li>
-							<li><a class="nav-link" href="{{ url_for('films_genres_afficher', id_receveur_sel=0) }}">Films/Genres</a></li>
-						</ul>
-					</li>
-
-					<li class="nav-item mx-auto">
-						<a class="nav-link" href="{{ url_for('personnes_taille_dict') }}">Démo "TAILLE"</a>
-					</li>
+					<a class="nav-link" href="404.html">404</a>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ url_for('route_hommage_a_u_x_V_ictim_es_du_monstre_du_mod_1_6_4') }}">Route "essai"</a>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Autres démos
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="{{ url_for('index') }}">Démo index (sans template)</a></li>
-							<li><a class="dropdown-item" href="404.html">404</a></li>
-							<li><a class="dropdown-item" href="{{ url_for('mon_premier_wtform') }}">Essai form</a></li>
-							<li><a class="dropdown-item" href="{{ url_for('demo_select_wtf') }}">Essai DROPDOWN</a></li>
-						</ul>
-					</li>
+<!--					<li class="nav-item dropdown">-->
+<!--						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--							Autres démos-->
+<!--						</a>-->
+<!--&lt;!&ndash;						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">&ndash;&gt;-->
+<!--&lt;!&ndash;							<li><a class="dropdown-item" href="{{ url_for('index') }}">Démo index (sans template)</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;							<li><a class="dropdown-item" href="404.html">404</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;							<li><a class="dropdown-item" href="{{ url_for('mon_premier_wtform') }}">Essai form</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;							<li><a class="dropdown-item" href="{{ url_for('demo_select_wtf') }}">Essai DROPDOWN</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;						</ul>&ndash;&gt;-->
+<!--					</li>-->
 				</ul>
 			</div>
 		</div>

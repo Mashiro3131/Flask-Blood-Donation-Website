@@ -62,7 +62,7 @@ def film_add_wtf():
 
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_receveur (id_receveur, prenom, nom, adresse, mail, num_tel, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom_receveur_add)s,%(value_name_nom_receveur_add)s,%(value_name_adresse_receveur_add)s,%(value_name_mail_receveur_add)s,%(value_name_num_tel_receveur_add)s,%(value_name_date_naissance)s,%(value_name_date_naissance_receveur_add)s )"""
+                strsql_insert_film = """INSERT INTO t_receveur (id_receveur, prenom, nom, adresse, mail, numero_telephone, date_naissance, groupe_sanguin) VALUES (NULL,%(value_name_prenom_receveur_add)s,%(value_name_nom_receveur_add)s,%(value_name_adresse_receveur_add)s,%(value_name_mail_receveur_add)s,%(value_name_num_tel_receveur_add)s,%(value_name_date_naissance_receveur_add)s,%(value_name_groupe_sanguin_receveur_add)s )"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -70,7 +70,7 @@ def film_add_wtf():
                 print(f"Données insérées !!")
 
                 # Pour afficher et constater l'insertion du nouveau film (id_receveur_sel=0 => afficher tous les films)
-                return redirect(url_for('receveur_afficher', id_receveur_sel=0))
+                return redirect(url_for('film_add_wtf', id_receveur_sel=0))
 
         except Exception as Exception_genres_ajouter_wtf:
             raise ExceptionGenresAjouterWtf(f"fichier : {Path(__file__).name}  ;  "
@@ -80,7 +80,7 @@ def film_add_wtf():
     return render_template("films/film_add_wtf.html", form_add_receveur=form_add_receveur)
 
 
-"""Editer(update) un film qui a été sélectionné dans le formulaire "receveur_afficher.html"
+"""Editer(update) un film qui a été sélectionné dans le formulaire "film_add_wtf.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_update
 
@@ -99,68 +99,75 @@ Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_updat
 @app.route("/film_update", methods=['GET', 'POST'])
 def film_update_wtf():
     # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_receveur"
-    id_film_update = request.values['id_film_btn_edit_html']
+    id_receveur_update = request.values['id_film_btn_edit_html']
 
     # Objet formulaire pour l'UPDATE
-    form_update_film = FormWTFUpdateFilm()
+    form_update_receveur = FormWTFUpdateFilm()
     try:
-        print(" on submit ", form_update_film.validate_on_submit(), "  ", form_update_film.validate())
-        if form_update_film.validate_on_submit():
+        print(" on submit ", form_update_receveur.validate_on_submit(), "  ", form_update_receveur.validate())
+        if form_update_receveur.validate_on_submit():
             # Récupèrer la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
-            nom_film_update = form_update_film.nom_film_update_wtf.data
-            duree_film_update = form_update_film.duree_film_update_wtf.data
-            description_film_update = form_update_film.description_film_update_wtf.data
-            datesortie_film_update = form_update_film.datesortie_film_update_wtf.data
+            nom_prenom_receveur_update_wtf = form_update_receveur.nom_prenom_receveur_update_wtf.data
+            nom_nom_receveur_update_wtf = form_update_receveur.nom_nom_receveur_update_wtf.data
+            nom_adresse_receveur_update_wtf = form_update_receveur.nom_adresse_receveur_update_wtf.data
+            nom_mail_receveur_update_wtf = form_update_receveur.nom_mail_receveur_update_wtf.data
+            nom_num_tel_receveur_update_wtf = form_update_receveur.nom_numero_telephone_receveur_update_wtf.data
+            nom_date_naissance_receveur_update_wtf = form_update_receveur.nom_date_naissance_receveur_update_wtf.data
+            nom_groupe_sanguin_receveur_update_wtf = form_update_receveur.nom_groupe_sanguin_receveur_update_wtf.data
 
-            valeur_update_dictionnaire = {"value_id_film": id_film_update,
-                                          "value_nom_film": nom_film_update,
-                                          "value_duree_film": duree_film_update,
-                                          "value_description_film": description_film_update,
-                                          "value_datesortie_film": datesortie_film_update
+            valeur_update_dictionnaire = {"value_id_donneur": id_receveur_update,
+                                          "value_name_prenom_receveur_update": nom_prenom_receveur_update_wtf,
+                                          "value_name_nom_receveur_update": nom_nom_receveur_update_wtf,
+                                          "value_name_adresse_receveur_update": nom_adresse_receveur_update_wtf,
+                                          "value_name_mail_receveur_update": nom_mail_receveur_update_wtf,
+                                          "value_name_numero_telephone_receveur_update": nom_num_tel_receveur_update_wtf,
+                                          "value_name_date_naissance_receveur_update": nom_date_naissance_receveur_update_wtf,
+                                          "value_name_groupe_sanguin_receveur_update": nom_groupe_sanguin_receveur_update_wtf
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_nom_film = """UPDATE t_receveur SET nom_film = %(value_nom_film)s,
-                                                            duree_film = %(value_duree_film)s,
-                                                            description_film = %(value_description_film)s,
-                                                            date_sortie_film = %(value_datesortie_film)s
-                                                            WHERE id_receveur = %(value_id_film)s"""
+            str_sql_update_nom_receveur = """UPDATE t_donneur SET prenom = %(value_name_prenom_receveur_update)s, nom = %(value_name_nom_receveur_update)s, adresse = %(value_name_adresse_receveur_update)s,  mail = %(value_name_mail_receveur_update)s, numero_telephone = %(value_name_numero_telephone_receveur_update)s, date_naissance = %(value_name_date_naissance_receveur_update)s, groupe_sanguin = %(value_name_groupe_sanguin_receveur_update)s WHERE id_receveur = %(value_id_receveur)s"""
             with DBconnection() as mconn_bd:
-                mconn_bd.execute(str_sql_update_nom_film, valeur_update_dictionnaire)
+                mconn_bd.execute(str_sql_update_nom_receveur, valeur_update_dictionnaire)
 
             flash(f"Donnée mise à jour !!", "success")
             print(f"Donnée mise à jour !!")
 
             # afficher et constater que la donnée est mise à jour.
-            # Afficher seulement le film modifié, "ASC" et l'"id_film_update"
-            return redirect(url_for('receveur_afficher', id_receveur_sel=id_film_update))
+            # Afficher seulement le film modifié, "ASC" et l'"id_receveur_update"
+            return redirect(url_for('film_add_wtf', id_receveur_sel=id_receveur_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_receveur" et "intitule_genre" de la "t_donneur"
-            str_sql_id_film = "SELECT * FROM t_receveur WHERE id_receveur = %(value_id_film)s"
-            valeur_select_dictionnaire = {"value_id_film": id_film_update}
+            str_sql_id_film = "SELECT * FROM t_receveur WHERE id_receveur = %(value_id_receveur)s"
+            valeur_select_dictionnaire = {"value_id_receveur": id_receveur_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
             data_film = mybd_conn.fetchone()
             print("data_film ", data_film, " type ", type(data_film), " genre ",
-                  data_film["nom_film"])
+                  data_film["prenom"])
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
-            form_update_film.nom_film_update_wtf.data = data_film["nom_film"]
-            print(f" dta film  ", data_film["nom_film"])
-            form_update_film.duree_film_update_wtf.data = data_film["duree_film"]
+            form_update_receveur.nom_prenom_receveur_update_wtf.data = data_film["prenom"]
+            print(f" dta film  ", data_film["prenom"])
+            form_update_receveur.duree_film_update_wtf.data = data_film["duree_film"]
             print(f" duree film  ", data_film["duree_film"], "  type ", type(data_film["duree_film"]))
-            form_update_film.description_film_update_wtf.data = data_film["description_film"]
-            form_update_film.datesortie_film_update_wtf.data = data_film["date_sortie_film"]
+            form_update_receveur.description_film_update_wtf.data = data_film["description_film"]
+            form_update_receveur.datesortie_film_update_wtf.data = data_film["date_sortie_film"]
+
+
+
+
+
     except Exception as Exception_film_update_wtf:
         raise ExceptionFilmUpdateWtf(f"fichier : {Path(__file__).name}  ;  "
                                      f"{film_update_wtf.__name__} ; "
                                      f"{Exception_film_update_wtf}")
 
-    return render_template("films/film_update_wtf.html", form_update_film=form_update_film)
+    return render_template("films/film_update_wtf.html", form_update_receveur=form_update_receveur)
 
 
-"""Effacer(delete) un film qui a été sélectionné dans le formulaire "receveur_afficher.html"
+"""Effacer(delete) un film qui a été sélectionné dans le formulaire "film_add_wtf.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_delete
     
@@ -186,7 +193,7 @@ def film_delete_wtf():
     try:
         # Si on clique sur "ANNULER", afficher tous les films.
         if form_delete_film.submit_btn_annuler.data:
-            return redirect(url_for("receveur_afficher", id_receveur_sel=0))
+            return redirect(url_for("film_add_wtf", id_receveur_sel=0))
 
         if form_delete_film.submit_btn_conf_del_film.data:
             # Récupère les données afin d'afficher à nouveau
@@ -216,7 +223,7 @@ def film_delete_wtf():
             print(f"Film définitivement effacé !!")
 
             # afficher les données
-            return redirect(url_for('receveur_afficher', id_receveur_sel=0))
+            return redirect(url_for('film_add_wtf', id_receveur_sel=0))
         if request.method == "GET":
             valeur_select_dictionnaire = {"value_id_film": id_film_delete}
             print(id_film_delete, type(id_film_delete))
