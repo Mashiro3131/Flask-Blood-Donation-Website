@@ -32,11 +32,10 @@ Tout d'abord, il faut ouvrir le serveur UwAmp. Pour cela, il faut tout simplemen
 Ensuite, vous devez ouvrir UwAmp ainsi que importer via "PhpMyAdmin" ma base de donnée SQL.
 
 Dernièrement, vous devez ouvrir PyCharm. Dans Pycharm vous devez importer mon dossier ("file" -> "open" -> et sélectionnez mon dossier "dézippé").
-Le résultat devrait être comme ça :
-![pycharm avec mon dossier ouvert](https://cdn.discordapp.com/attachments/359216004381016074/985106785918652466/unknown.png)
+
 
 Tout d'abord, veuillez importer mon .sql dans le programme en utilisant le fichier "1_ImportationDumpSql". Exécutez le fichier en cliquant sur le bouton ouvert en haut à droite du programme ou en faisant clic droit sur le fichier et "run". Il faut le faire qu'une fois.
-![pycharm avec mon dossier ouvert](https://cdn.discordapp.com/attachments/359216004381016074/985108767895093258/unknown.png)
+
 
 À chaque fois que vous voudrez utiliser mon programme, il faudra obligatoirement ouvrir PyCharm ainsi que UwAmp.
 
@@ -44,9 +43,8 @@ Tout d'abord, veuillez importer mon .sql dans le programme en utilisant le fichi
 
 Maintenant que tout est configuré, nous pouvons enfin lancer le programme en exécutant le fichier "run_mon_app.py".
 ![ImageRunMonapp](https://cdn.discordapp.com/attachments/359216004381016074/985110767147831317/unknown.png)
-Une console s'affichera, il suffit de cliquer sur le lien pour accéder au site. Par défaut, le lien est http://127.0.0.1:5577/
-En ouvrant le site vous tomberez sur la page d'accueil :
-![accueil du site](https://cdn.discordapp.com/attachments/359216004381016074/985111739425230858/unknown.png)
+Une console s'affichera, il suffit de cliquer sur le lien pour accéder au site. Par défaut, le lien est http://127.0.0.1:5500/
+En ouvrant le site vous tomberez sur la page d'accueil 
 Vous avez désormais accès à mon site ! Vous avez donc bien suivi la procédure et terminé avec succès !
 
 
