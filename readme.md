@@ -1,4 +1,4 @@
-# Tutoriel d'installation du gestionnaire des notes d'élèves
+# Tutoriel d'installation du gestionnaire du don du sang
 
 <font face="Verdana"> Bienvenue sur ce tutoriel d'installation de l'application.
 <font face="Verdana"> Ce tutoriel aura pour but d'expliquer comment installer ainsi qu'utiliser ce programme.
